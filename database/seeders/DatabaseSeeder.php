@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run() {
+
+        Schema::disableForeignKeyConstraints();
+
         // \App\Models\User::factory(10)->create();
         // $this->call([
         //     UserSeeder::class,
@@ -26,26 +29,31 @@ class DatabaseSeeder extends Seeder
         //     ContactMessageSeeder::class,
         // ]);
 
-        // $this->call(UsersTableSeeder::class);
         // $this->call(UserRoleTableSeeder::class);
+        // $this->call(UsersTableSeeder::class);
 
-        Schema::disableForeignKeyConstraints();
+        $this->call([
+            BrandSeeder::class,
+            CategorySeeder::class,
+            // ProductSeeder::class,
+        ]);
 
-        Brand::truncate();
+
+
+        
         Tag::truncate();
-        Product::truncate();
+        
         DB::table('category_product')->truncate();
         DB::table('category_tag')->truncate();
         DB::table('product_tag')->truncate();
 
         Category::flushEventListeners();
+        Brand::flushEventListeners();
         Product::flushEventListeners();
 
-        $categoriesQuantity = 30;
-        $productsQuantity = 1000;
-
-        
-        Category::factory()->count($categoriesQuantity)->create();
+        // $categoriesQuantity = 30;
+        // $productsQuantity = 1000;
+        // Category::factory()->count($categoriesQuantity)->create();
 
         Schema::enableForeignKeyConstraints();
 
