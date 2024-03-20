@@ -1,0 +1,153 @@
+
+1. setting thek fix kora jabe, contact information setting
+2. nav ok
+3. search ok
+4. banner_big: 995 x 465px , 238 x 143px
+5. hot category admin theke fix kora jay
+6. home page side category hover added
+7. top category ja thakbe tai dekhabe.
+8. ok. baki gulo pele janate hobe.
+
+10. jegulo dkehacce abar edit korte hobe.
+11. add kora ache. varients er upor change hobe.
+
+19. problem nai cholbe
+20. footer somossa nei cholbe.
+21. side banner ekhon thik ache.
+
+22. product details ok
+13. phone number multiple add korar option ache.
+17. footer pages dynamic.
+9. gallery add korte hobe.
+26. backend e product offer add korte hobe
+
+12. notok admin login fix korte hobe. somossa paccina.
+15. notok telegram add kora
+16. notok email invoice.
+18. notok load speed fix.
+24. notok pc compare
+14. notok marchet api dite hobe. bkash add korar option ache.
+25. notok ssl commerze
+
+23. notok pc builder
+
+product question answer
+
+
+// 1. newsletter table
+// 2. view_count in product table
+// 3. copyright in setting table
+// 4. terms_condition_1 - terms_condition_2 - terms_condition_3 - terms_condition_4
+// 5. big_about
+// had to unminify
+
+// 27-30-2917
+
+1. My reviews
+1. make compare table
+2. wishlist table
+3. productbybrand/category
+
+
+searche search resulter er niche ekta button/text thakbe - ekhane click korle ekta keyword diye
+ekta serach page e chole jabe
+
+
+Done
+1. banner image full width
+2. settings er breaking new ctg er moto
+3. Menu er jaigai Top Category only - sathe Contact ar About page
+4. category baad side theke
+   category page-get-category-product
+   url change korte bolse /category/id/category_title
+                        OR /category/category_slug
+5. catgeory title and short description dekhano
+    follow startech - https://www.startech.com.bd/desktops
+6. stock e na thakle addtoCart kora jabena and button er jaigai hobe "Stock Out
+7. price range diye search kora side e add kora lagbe
+8. countdown part dynamic
+
+
+
+///////////////////////////////////////////////////////////////////
+
+
+
+https://www.jqueryscript.net/demo/Feature-rich-Product-Gallery-With-Image-Zoom-xZoom/#magnific
+
+
+///////////////////////////////////////////////////////////////////
+
+
+
+
+///////////////////////////////////////////////////////////////////
+
+
+
+
+
+10. product box - follow techland
+     https://www.techlandbd.com/computers/desktop-computer
+11. brand dekhaben - https://www.techlandbd.com/computers/desktop-computer
+
+
+///////////////////////////////////////////////////////////////////
+
+
+
+
+5. product box e phaka beshi jaha sefu posondo kore nai
+   hover baad diya korle valo
+   height ar width baad ba jodi kom
+
+6. HOVER TOVER SOB baad
+    -> product image, title, discount price , sales_price
+        addtocart button, category
+
+
+
+
+12. price range diye search kora side e add kora lagbe
+
+13. product details -
+    a. image er jonno techland , and image zoom kore dekha jabe
+
+    b. ryans theke boltese mil rakha lagbena
+    -> title
+    -> reviews->product_code/id
+    -> short description
+    -> discount price - regular price
+    -> pricer pore .jquery.countdown - shall try
+    -> contact icon - whatsapp- messenger-telegram-email
+        computervillage
+
+
+
+
+
+
+
+
+
+category_products.blade.php
+imagebox.blade.php
+footer.blade.php
+search_product.blade.php
+wishlist.blade.php
+
+
+
+order - delete - table theke
+reset password
+
+
+
+
+
+
+
+
+
+
+
