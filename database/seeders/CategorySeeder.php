@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
      * @return void
      */
     public function run() {
-        
+
         Schema::disableForeignKeyConstraints();
         Category::truncate();
 
@@ -405,6 +405,26 @@ class CategorySeeder extends Seeder
         		'is_top_category' => 1,
         		'is_home_category' => 1,
         		'is_nav_category' => 1,
+        		'name' => 'Saree',
+        		'url' => 'saree',
+        		'description' => '<p>Nice sarees are avaialable</p>',
+                'parent_id' => 17,
+                'category_image' => null,
+                'page_title' => 'saree',
+                'meta_keywords' => 'saree',
+                'meta_description' => 'saree',
+                'search_keywords' => 'saree',
+                'creator' => '1',
+        		'slug' => 'saree',
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 21
+        	[
+        		'is_top_category' => 1,
+        		'is_home_category' => 1,
+        		'is_nav_category' => 1,
         		'name' => 'Winter',
         		'url' => 'winter',
         		'description' => '<p>Nice winter collections are avaialable</p>',
@@ -420,7 +440,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 21
+            // 22
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -440,7 +460,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 22
+            // 23
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -460,7 +480,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 23
+            // 24
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -480,7 +500,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 24
+            // 25
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -500,7 +520,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 25
+            // 26
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -520,7 +540,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 26
+            // 27
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -540,7 +560,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 27
+            // 28
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -560,7 +580,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 28
+            // 29
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -580,7 +600,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 29
+            // 30
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -600,7 +620,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 30
+            // 31
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -620,7 +640,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 31
+            // 32
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -640,7 +660,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 32
+            // 33
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -660,7 +680,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 33
+            // 34
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -680,7 +700,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 34
+            // 35
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -700,7 +720,7 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
-            // 35
+            // 36
         	[
         		'is_top_category' => 1,
         		'is_home_category' => 1,
@@ -720,6 +740,9 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
+
         ]);
+
+        Schema::enableForeignKeyConstraints();
     }
 }

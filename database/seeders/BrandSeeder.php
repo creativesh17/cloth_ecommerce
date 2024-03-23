@@ -90,5 +90,8 @@ class BrandSeeder extends Seeder
 		        'slug' => Str::slug('Grameen Check'),
 		    ],
         ]);
+
+
+        Schema::enableForeignKeyConstraints();
     }
 }

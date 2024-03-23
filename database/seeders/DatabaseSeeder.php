@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ContactMessage;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,40 +23,49 @@ class DatabaseSeeder extends Seeder
 
         Schema::disableForeignKeyConstraints();
 
-        // \App\Models\User::factory(10)->create();
-        // $this->call([
-        //     UserSeeder::class,
-        //     ExtraUserSeeder::class,
-        //     ContactMessageSeeder::class,
-        // ]);
-
-        // $this->call(UserRoleTableSeeder::class);
-        // $this->call(UsersTableSeeder::class);
+        Brand::flushEventListeners();
+        Category::flushEventListeners();
+        Tag::flushEventListeners();
+        Product::flushEventListeners();
+        ProductImage::flushEventListeners();
 
         $this->call([
             BrandSeeder::class,
             CategorySeeder::class,
-            // ProductSeeder::class,
+            TagSeeder::class,
+            ProductSeeder::class,
+            ProductImageSeeder::class,
+            CategoryProductSeeder::class,
+            // ProductTagSeeder::class,
+            ProductVariantSeeder::class,
+            ProductVariantValueSeeder::class,
+            ProductVariantValueProductSeeder::class
         ]);
 
 
 
-        
-        Tag::truncate();
-        
-        DB::table('category_product')->truncate();
-        DB::table('category_tag')->truncate();
-        DB::table('product_tag')->truncate();
-
-        Category::flushEventListeners();
-        Brand::flushEventListeners();
-        Product::flushEventListeners();
-
         // $categoriesQuantity = 30;
-        // $productsQuantity = 1000;
         // Category::factory()->count($categoriesQuantity)->create();
 
         Schema::enableForeignKeyConstraints();
 
     }
 }
+
+
+
+
+
+
+
+
+
+// \App\Models\User::factory(10)->create();
+// $this->call([
+//     UserSeeder::class,
+//     ExtraUserSeeder::class,
+//     ContactMessageSeeder::class,
+// ]);
+
+// $this->call(UserRoleTableSeeder::class);
+// $this->call(UsersTableSeeder::class);

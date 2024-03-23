@@ -22,6 +22,8 @@ class Product extends Model
         'rating_count',
     ];
 
+ 
+
     public function getRelatedCategoriesAttribute()
     {
         if (strlen($this->selected_categories)) {
