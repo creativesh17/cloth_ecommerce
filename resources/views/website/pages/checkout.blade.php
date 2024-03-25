@@ -116,7 +116,14 @@
                                         <input type="hidden" name="product[{{ $key }}][id]"
                                             value="{{ $product->id }}">
                                         <tr>
-                                            <td>{{ $product->name }}</td>
+                                            <td>
+                                                {{ $product->name }}
+                                                @if($product->options->v_titles)
+                                                    @foreach ($product->options->v_titles as $title)
+                                                        - {{ $title  }}
+                                                    @endforeach
+                                                @endif
+                                            </td>
                                             <td>{{ $product->price }} ৳ x {{ $product->qty }}</td>
                                             <td>{{ $product->price * $product->qty }} ৳</td>
                                         </tr>

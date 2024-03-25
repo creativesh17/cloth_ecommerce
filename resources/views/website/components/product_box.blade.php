@@ -50,8 +50,11 @@
         </div><!-- /.box-content -->
         <div class="box-bottom">
             <div class="btn-add-cart">
-                <a href="{{ route('cart.add', $product->id) }}" class="addtocart" title="">
+                {{-- <a href="{{ route('cart.add', $product->id) }}" class="addtocart" title="">
                     <img src="{{ asset('frontend')}}/images/icons/add-cart.png" alt="">Add to Cart
+                </a> --}}
+                <a href="{{ route('product_details_page', $product->id) }}" title="">
+                    <img src="{{ asset('frontend')}}/images/icons/add-cart.png" alt="">Buy Now
                 </a>
             </div>
             <div class="compare-wishlist">

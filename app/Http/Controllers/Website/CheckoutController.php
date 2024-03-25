@@ -148,12 +148,17 @@ class CheckoutController extends Controller
             $product = (object) $product;
             $order_details = new OrderDetails();
             $order_details->order_id = $order->id;
+
             if (Auth::user()) {
                 $order_details->user_id = Auth::user()->id;
             }
             // dd($product);
             $order_details->product_id = $product->id;
             $order_details->product_price = $product->price;
+
+            $order_details->variant_id = json_encode($product->options->v_ids);
+            $order_details->variant_title = json_encode($product->options->v_titles);
+            $order_details->variant_names = json_encode($product->options->v_names);
 
             $order_details->qty = $product->qty;
             $order_details->save();

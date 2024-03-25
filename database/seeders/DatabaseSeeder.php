@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             ProductImageSeeder::class,
             CategoryProductSeeder::class,
-            // ProductTagSeeder::class,
+            ProductTagSeeder::class,
             ProductVariantSeeder::class,
             ProductVariantValueSeeder::class,
             ProductVariantValueProductSeeder::class

@@ -14,32 +14,9 @@
 
 @push('css_plugin')
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/stylesheets/better-rating.css">
+<link rel="stylesheet" href="{{ asset('frontend') }}/stylesheets/nice-select.css">
 <link rel="stylesheet" href="{{ asset('contents/website/plugins/lightbox/lightbox.min.css') }}">
 @endpush
-
-{{-- @section('shortDetails')
-    <div class="flat-row-title">
-        <h3>{{ $category ? $category->name : '' }}</h3>
-        <div class="clearfix"></div>
-        <div class="py-4">
-            <p class="">{!! $category->description ?? '' !!}</p>
-        </div>
-    </div>
-    @php
-        $brandAlls = \App\Models\Brand::where('status', 1)->latest()->limit(12)->get();
-    @endphp
-    <div class="col-md-12 bread-brand">
-        <ul class="child-list my-2 d-flex flex-wrap gap-2">
-            @foreach ($category->childrens as $child)
-            <li>
-                <a href="{{ route('category_product', $child->slug) }}">
-                    {{ $child->name }}
-                </a>
-            </li>
-            @endforeach
-        </ul>
-    </div>
-@endsection --}}
 
 
 
@@ -244,20 +221,12 @@
                                             </a><br>
                                         </td>
                                     </tr>
-                                    {{-- @php
-                                        $variants = $product->productvariants()->get()->unique('title');
-                                        $varaintValues = [];
-                                        foreach ($variants as $key => $variant) {
-                                            $varaintValues[$variant->title] =  $variant->value_products()->where('product_id', $product->id)->with('value')->get();
-
-                                        }
-                                    @endphp --}}
                                     @foreach ($varaintValues as $key=>$variants)
                                     <tr>
                                         <td>{{ $key }}</td>
                                         <td>
                                             @foreach ($variants as $value)
-                                                {{ $value->value->title }},
+                                                {{ $value->value->title }}, 
                                             @endforeach
                                         </td>
                                     </tr>
@@ -308,14 +277,18 @@
                         @csrf
                         <div class="footer-detail">
                             <div class="product_cart_box">
-                                {{-- <div class="colors">
-                                    <select name="color">
-                                        <option value="">Select Color</option>
-                                        <option value="">Black</option>
-                                        <option value="">Red</option>
-                                        <option value="">White</option>
+                                
+                                @foreach ($varaintValues as $key=>$variants)
+                                <div class="colors">
+                                    <select name="variants[]">
+                                        <option value="">Select {{ $key }}</option>
+                                        @foreach ($variants as $value)
+                                            <option value="{{ $key }}___{{ $value->value->title }}___{{ $value->value->id }}">{{ $value->value->title }}</option>
+                                        @endforeach
                                     </select>
-                                </div> --}}
+                                </div>
+                                @endforeach
+
                                 <div class="">
                                     <span class=""></span>
                                     <input type="number" class="cartQuantity" name="qty" value="1" min="1" max="100" placeholder="Quanlity">
@@ -400,7 +373,6 @@
 <section class="flat-product-content">
     <ul class="product-detail-bar">
         <li class="active">Description</li>
-        <li>Tecnical Specs</li>
         <li>Reviews</li>
     </ul><!-- /.product-detail-bar -->
 
@@ -408,18 +380,25 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="description-text">
-                    {!! $product->description !!}
+                    <table>
+                        <tbody>
+                            @foreach ($varaintValues as $key=>$variants)
+                            <tr>
+                                <td>{{ $key }} : </td>
+                                <td>
+                                    @foreach ($variants as $value)
+                                        {{ $value->value->title }},
+                                    @endforeach
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div><!-- /.description-text -->
             </div><!-- /.col-md-6 -->
         </div><!-- /.row -->
 
-        <div class="row">
-            <div class="col-md-10">
-                <div class="tecnical-specs">
-                    {!! $product->specification !!}
-                </div><!-- /.tecnical-specs -->
-            </div><!-- /.col-md-12 -->
-        </div><!-- /.row -->
+   
 
 
         <div class="row">
@@ -653,8 +632,14 @@
 @endsection
 @push('js_plugin')
 <script src="{{ asset('contents/website/plugins/lightbox/lightbox.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('frontend') }}/javascript/jquery.nice-select.min.js"></script>
 <script type="text/javascript" src="{{ asset('frontend') }}/javascript/better-rating.js"></script>
 <script>
     $('#better-rating-form').betterRating();
+</script>
+<script>
+    $(document).ready(function() {
+        $('select').niceSelect();
+    });
 </script>
 @endpush

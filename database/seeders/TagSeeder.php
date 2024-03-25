@@ -99,8 +99,8 @@ class TagSeeder extends Seeder
         	],
             // 12
         	[
-        		'title' => 'EthnicWear',
-        		'url' => Str::slug('EthnicWear'),
+        		'title' => 'EcoShirts',
+        		'url' => Str::slug('EcoShirts'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
@@ -155,11 +155,76 @@ class TagSeeder extends Seeder
         	],
             // 20
         	[
-        		'title' => 'Silk garments',
-        		'url' => Str::slug('Silk garments'),
+        		'title' => 'shirts',
+        		'url' => Str::slug('shirts'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
         	],
+            // 21
+        	[
+        		'title' => 'Polo',
+        		'url' => Str::slug('Polo'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 22
+        	[
+        		'title' => 'Pant',
+        		'url' => Str::slug('Pant'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 23
+        	[
+        		'title' => 'Blazer',
+        		'url' => Str::slug('Blazer'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 24
+        	[
+        		'title' => 'Denim',
+        		'url' => Str::slug('Denim'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 25
+        	[
+        		'title' => 'Gabardine',
+        		'url' => Str::slug('Gabardine'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 26
+        	[
+        		'title' => 'Twill',
+        		'url' => Str::slug('Twill'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 27
+        	[
+        		'title' => 'Jogger',
+        		'url' => Str::slug('Jogger'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 28
+        	[
+        		'title' => 'Wedding Collection',
+        		'url' => Str::slug('Wedding Collection'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+            // 29
+        	[
+        		'title' => 'Sherwani',
+        		'url' => Str::slug('Sherwani'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+        	],
+
+
         ]);
 
         Schema::enableForeignKeyConstraints();

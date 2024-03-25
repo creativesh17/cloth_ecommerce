@@ -54,6 +54,11 @@
                                                         </div>
                                                         <div class="name-product">
                                                             {{ $product->name }}
+                                                            @if($product->options->v_titles)
+                                                                @foreach ($product->options->v_titles as $title)
+                                                                    - {{ $title  }}
+                                                                @endforeach
+                                                            @endif
                                                         </div>
                                                         <div class="price">
                                                             {{ $product->price }} ৳
@@ -89,7 +94,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="d-flex justify-content-end">
+                                    <div class="d-flex justify-content-end p-2">
                                         <button type="submit" class="btn btn-info" title="">Update Cart</button>
                                     </div>
                                 </form>

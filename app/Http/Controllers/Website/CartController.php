@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Product\ProductVariantValue;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -37,23 +38,39 @@ class CartController extends Controller
     }
 
     public function addToCart(Product $product, Request $request) {
-        // return $product;
-        // if ($product->discounts && $product->discounts['discount_last_date'] > Carbon::now()) {
 
-        // }
-        // return $product;
+        $v_names = [];
+        $v_titles = [];
+        $v_ids = [];
+        foreach($request->variants as $variant) {
+            if(count(explode("___",$variant)) == 3) {
+                $v_names[] = explode("___",$variant)[0];
+                $v_titles[] = explode("___",$variant)[1];
+                $v_ids[] = explode("___",$variant)[2];
+            }
+            
+        }
+     
         $added = Cart::add([
             'id' => $product->id,
             'name' => $product->product_name,
             'qty' => $request->qty ?: 1 ,
             'price' => $product->active_price ?: $product->sales_price,
             'weight' => 0,
-            'options' => ['image' => $product->photo_url ]
+            'options' => [
+                'image' => $product->photo_url,
+                'v_names' => $v_names,
+                'v_titles' => $v_titles,
+                'v_ids' => $v_ids,
+            ]
         ]);
+
+
 
         if($added) {
             return response()->json([
-                'success' => $added->name.' has been added to your cart'
+                'success' => $added->name.' has been added to your cart',
+                'data'=> Cart::content()
             ]);
         }
     }

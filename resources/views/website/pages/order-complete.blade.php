@@ -75,7 +75,32 @@
                                             @foreach ($order_details as $key=>$dorder)
                                             <tr>
                                                 <td class="center">{{ $key+1 }}</td>
-                                                <td class="left strong">{{ $dorder->product->product_name }}</td>
+                                                <td class="left strong">
+                                                    {{ $dorder->product->product_name }}
+                                                    <div>
+                                                        {{-- @dump($dorder->variant_names) --}}
+                                                        @php
+                                                            try {
+                                                        @endphp
+
+                                                        @if ($dorder->variant_names)
+                                                            @php
+                                                                $v_names = json_decode($dorder->variant_names);
+                                                                $v_titles = json_decode($dorder->variant_title);
+                                                            @endphp
+                                                            @foreach ($v_names as $key=>$title)
+                                                                <b>{{ $title }}</b>: {{ $v_titles[$key] }},
+                                                            @endforeach
+                                                        @endif
+                                                        
+                                                        @php
+                                                            } catch (\Throwable $th) {
+                                                                //throw $th;
+                                                            }    
+                                                        @endphp
+                                                        
+                                                    </div>
+                                                </td>
                                                 <td class="right">{{ $dorder->product_price }} tk</td>
                                                 <td class="center">{{ $dorder->qty }}</td>
                                                 <td class="right" style="text-align: right;">{{ $dorder->product_price * $dorder->qty }} tk</td>
