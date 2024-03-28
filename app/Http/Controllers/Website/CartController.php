@@ -39,9 +39,12 @@ class CartController extends Controller
 
     public function addToCart(Product $product, Request $request) {
 
+        // return $product->productvariants;
+
         $v_names = [];
         $v_titles = [];
         $v_ids = [];
+        // dd($request->variants);
         foreach($request->variants as $variant) {
             if(count(explode("___",$variant)) == 3) {
                 $v_names[] = explode("___",$variant)[0];
@@ -65,8 +68,6 @@ class CartController extends Controller
             ]
         ]);
 
-
-
         if($added) {
             return response()->json([
                 'success' => $added->name.' has been added to your cart',
@@ -74,6 +75,7 @@ class CartController extends Controller
             ]);
         }
     }
+    
 
     public function cartItems() {
         return view('website.pages.cartitems');

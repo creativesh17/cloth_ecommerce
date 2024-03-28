@@ -40,5 +40,5 @@ html[xmlns] .flexslider .slides{display:block;}
 .flex-control-thumbs li{float:left;margin:0;margin-right:32px;}
 .flex-control-thumbs li:last-child{margin-right:0px;}
 .flex-control-thumbs img{max-width:100%;height:auto;display:block;cursor:pointer;-moz-user-select:none;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;-ms-transition:all 1s ease;-o-transition:all 1s ease;transition:all 1s ease;height:85px;border:2px solid #e5e5e5;border-radius:10px;}
-.flex-control-thumbs img:hover{opacity:1;border:2px solid #f28b00;}
-.flex-control-thumbs .flex-active{cursor:default;border:2px solid #f28b00;}
+.flex-control-thumbs img:hover{opacity:1;border:2px solid var(--brand);}
+.flex-control-thumbs .flex-active{cursor:default;border:2px solid var(--brand);}

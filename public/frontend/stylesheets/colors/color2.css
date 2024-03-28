@@ -98,6 +98,6 @@ input[type="submit"],
 
 .slider-item.style2 .item-text .content-item .price .sale,
 .box-cart .inner-box > a > div.icon-cart span {
-	background-color: #f92400;
+	background-color: var(--brand);
 }
 

@@ -48,8 +48,9 @@
                                                 </div>
                                                 <div>
                                                     <div class="btn-add-cart compare-add-to-cart">
-                                                        <a href="{{ route('cart.add', $compareProducts[$i]['id']) }}" class="addtocart" title="">Add to Cart
-                                                            {{-- <img src="{{ asset('frontend')}}/images/icons/add-cart.png" alt="" style="margin-right: 2px;">Add to Cart --}}
+                                                       
+                                                        <a id="showProduct" href="#" data-toggle="modal" data-target="#myShowProduct" data-id="{{ $compareProducts[$i]['id'] }}">
+                                                            <img src="{{ asset('frontend')}}/images/icons/add-cart.png" alt=""> Add to Cart
                                                         </a>
                                                         <a href="{{ route('remove.compare.item', $compareProducts[$i]['id']) }}" class="removeItem" title="">Remove Item
                                                             {{-- <img src="{{ asset('frontend') }}/images/icons/delete.png" alt="">Remove Item --}}

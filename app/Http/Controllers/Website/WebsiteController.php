@@ -52,8 +52,9 @@ class WebsiteController extends Controller
     }
 
     public function product_details($id) {
-        // dd($id);
-        // session()->put('destination', url()->current());
+        
+        // $id = request()->get('modal_id');
+
         $sumStar = null;
         $product = Product::where('id', $id)
             ->withSum('stocks', 'qty')
@@ -61,6 +62,9 @@ class WebsiteController extends Controller
             ->with('product_brand')
             ->first();
         // return $product->categories;
+
+
+        // 
         $category = $product->categories()->first();
 
         $productKey = 'product_' . $product->id;
@@ -71,27 +75,41 @@ class WebsiteController extends Controller
 
         $revs = ProductReview::where('product_id', $id)->where('status', 1)->get();
         $revs = $product->reviews ?: null;
-        // $countRatings = 0;
-        // foreach ($revs as $value) {
-        //     $sumStar += $value->star;
-        //     $countRatings = $countRatings + 1;
-        // }
-        // $avg = $sumStar / $countRatings;
-        // return $avg;
 
-        // foreach ($product->categories as $category) {
-        //  dd($category->name);
-        // }
         $variants = $product->productvariants()->get()->unique('title');
         $varaintValues = [];
         foreach ($variants as $key => $variant) {
             $varaintValues[$variant->title] =  $variant->value_products()->where('product_id', $product->id)->with('value')->get();
-            
         }
-        // return $product;
-        // dd($product);
         return view('website.pages.product-details', compact('product', 'category',  'revs', 'varaintValues'));
-        // return view('frontend.product-details', compact('product'));
+       
+    }
+
+    public function product_details_modal($id) {
+        $sumStar = null;
+        $product = Product::where('id', $id)
+            ->withSum('stocks', 'qty')
+            ->withSum('sales', 'qty')
+            ->with('product_brand')
+            ->first();
+        $category = $product->categories()->first();
+
+        $productKey = 'product_' . $product->id;
+        if (!Session::has($productKey)) {
+            $product->increment('view_count');
+            Session::put($productKey, 1);
+        }
+
+        $revs = ProductReview::where('product_id', $id)->where('status', 1)->get();
+        $revs = $product->reviews ?: null;
+
+        $variants = $product->productvariants()->get()->unique('title');
+        $varaintValues = [];
+        foreach ($variants as $key => $variant) {
+            $varaintValues[$variant->title] =  $variant->value_products()->where('product_id', $product->id)->with('value')->get();
+        }
+        return view('website.components.product_details_modal_content', compact('product', 'category',  'revs', 'varaintValues'));
+       
     }
 
 

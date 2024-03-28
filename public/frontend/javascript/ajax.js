@@ -81,5 +81,28 @@ $(document).on('click', '.addtocart', function(e) {
 });
 
 
+$(document).on("click", "#showProduct", function () {
+    var productID = $(this).data('id');
+    $(".modal-body #modal_id").val( productID );
 
+    fetch("/product-details-modal/"+productID)
+        .then(res=>res.text())
+        .then(res=>{
+            document.querySelector('.modal_add_cart_form').action = `/cart/add/${productID}`;
+            document.getElementById('cart_modal_content').innerHTML = res;
+            $('#cart_modal').modal('show');
+        })
+
+    // var form = document.getElementById("myFormProduct");
+
+    // var action = form.getAttribute("data-action");
+    // // console.log(window.origin);
+    // // console.log(action);    
+    // action = window.origin + "/product/" + productID;
+    // // console.log(action);    
+    // form.action = action;
+
+    // form.submit();
+
+});
 

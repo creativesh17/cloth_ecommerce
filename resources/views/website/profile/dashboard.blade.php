@@ -27,7 +27,7 @@
                                                     <img src="{{ asset('frontend') }}/images/icons/order.png" alt="Total Orders" width="21" height="19">
                                                 </div>
                                                 <div class="title">
-                                                    <h3><strong style="color: #f28b00;">My Orders</strong></h3>
+                                                    <h3><strong style="color: var(--brand);">My Orders</strong></h3>
                                                 </div>
                                                 <div class="">
                                                     <p class="mt-4 dashboard-card-number">
@@ -47,7 +47,7 @@
                                                     <img src="{{ asset('frontend') }}/images/icons/wishlist.png" alt="Total Wishlist">
                                                 </div>
                                                 <div class="title">
-                                                    <h3><strong style="color: #f28b00;">My Wishlist</strong></h3>
+                                                    <h3><strong style="color: var(--brand);">My Wishlist</strong></h3>
                                                 </div>
                                                 <div class="">
                                                     <p class="mt-4 dashboard-card-number">
@@ -66,7 +66,7 @@
                                                     <img src="{{ asset('frontend') }}/images/icons/share.png" alt="Total Reviews" width="21" height="19">
                                                 </div>
                                                 <div class="title">
-                                                    <h3><strong style="color: #f28b00;">My Reviews</strong></h3>
+                                                    <h3><strong style="color: var(--brand);">My Reviews</strong></h3>
                                                 </div>
                                                 <div class="">
                                                     <p class="mt-4 dashboard-card-number">
@@ -84,7 +84,7 @@
                                                     <img src="{{ asset('frontend') }}/images/icons/payment.png" alt="Total Reviews" width="21" height="19">
                                                 </div>
                                                 <div class="title ">
-                                                    <h3><strong style="color: #f28b00;">My Payments</strong></h3>
+                                                    <h3><strong style="color: var(--brand);">My Payments</strong></h3>
                                                 </div>
                                                 <div class="">
                                                     <p class="mt-4 dashboard-card-number">

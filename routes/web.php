@@ -83,6 +83,7 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
     Route::get('/category/{slug}', 'Website\WebsiteController@category_product')->name('category_product');
     Route::get('/brand/{id}', 'Website\WebsiteController@productsByBrands')->name('productsByBrands');
     Route::get('/product/{id}', 'Website\WebsiteController@product_details')->name('product_details_page');
+    Route::get('/product-details-modal/{id}', 'Website\WebsiteController@product_details_modal');
     Route::get('/clear/compare', 'Website\CompareController@clear_compare_all')->name('clear.compare');
     Route::get('/clear/item/compare/{id}', 'Website\CompareController@clear_compare_item')->name('remove.compare.item');
 

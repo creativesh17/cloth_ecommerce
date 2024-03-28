@@ -87,6 +87,21 @@
 
         @include('website.layouts.partials.footer')
 
+        <!-- Large modal -->
+        <div class="modal fade" id="cart_modal" tabindex="-1" role="dialog" aria-labelledby="cart_modal_abel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-body">
+                    <form action="" class="modal_add_cart_form" method="POST" id="addCart">
+                        @csrf
+                        <div id="cart_modal_content">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
 
     </div><!-- /.boxed -->
@@ -197,6 +212,18 @@
                 })
             });
         });
+    </script>
+
+
+    <script>
+        //Modal code start
+        // $(document).ready(function(){
+        //     $(document).on("click", "#showProduct", function () {
+        //         var productID = $(this).data('id');
+        //         $(".modal-body #modal_id").val( productID );
+        //     });
+        // });
+            
     </script>
 
 
