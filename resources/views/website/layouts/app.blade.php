@@ -92,11 +92,9 @@
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-body">
-                    <form action="" class="modal_add_cart_form" method="POST" id="addCart">
+                    <form action="" class="modal_add_cart_form" onsubmit="modal_cart_form_submit();" method="POST">
                         @csrf
-                        <div id="cart_modal_content">
-
-                        </div>
+                        <div id="cart_modal_content"></div>
                     </form>
                 </div>
             </div>

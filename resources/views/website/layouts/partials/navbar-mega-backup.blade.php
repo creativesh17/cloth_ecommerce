@@ -7,7 +7,7 @@
     <ul class="menu" style="z-index: -9;">
         @foreach ($parentCats as $cate)
         <li>            
-            <a href="{{ route('category_product', $cate->slug) }}" title="" class="{{ $cate->childrens->count() ? 'dropdown' : '' }}">
+            <a href="{{ route('category_product', $cate->slug) }}" title="" class="dropdown">
                 <span class="menu-img">                    
                     @if ($cate->category_image)
                     <img src="{{ $cate->category_image }}" alt="" width="25px" height="23px">    
@@ -20,31 +20,31 @@
 
                 </span>
             </a>
-
-            @if($cate->childrens->count())
             <div class="drop-menu overflowY" >
                 @foreach($cate->childrens as $child)
-
                 <div class="one-third category-show" >
                         <div class="cat-title">
                             {{ $child->name }}
                         </div>
-
                         {{-- @dd($child->childrens) --}}
 
                         <ul>
-                            @foreach ($child->childrens as $category)
-                            <li>
-                                <a href="{{ route('category_product', $category->slug) }}" title="">{{ $category->name }}</a>
-                            </li>
-                            @endforeach
+                            <?php
+                            foreach ($cate->childrens as $category) {
+                            ?>
+                                <li>
+                                    <a href="{{ route('category_product', $category->slug) }}" title="">{{ $category->name }}</a>
+                                </li>
+                            <?php
+                            }
+                            ?>
+
                         </ul>
 
                       
                     </div>
                     @endforeach
             </div>
-            @endif
         </li>
         @endforeach
 

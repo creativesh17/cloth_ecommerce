@@ -47,7 +47,8 @@
 	}
 
 	#mainnav.style2 {
-		float:right;padding-left:0px;
+		float:right;
+		padding-left:0px;
 	}
 
 	#mainnav.style2 ul.menu > li.has-mega-menu:hover > .submenu {

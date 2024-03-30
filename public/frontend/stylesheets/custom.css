@@ -356,3 +356,9 @@ span .error {
   border-radius: 5px;
   margin: 5px;
 }
+
+
+.header-dropdown {
+  height: 500px;
+  overflow: scroll;
+}

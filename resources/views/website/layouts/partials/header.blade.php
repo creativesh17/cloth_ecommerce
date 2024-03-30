@@ -139,7 +139,7 @@
                             }
                         ?>
 
-                        <div class="dropdown-box">
+                        <div class="dropdown-box header-dropdown">
                             @foreach ($cartItems as $key => $item)
                                 <ul >
                                     <li>

@@ -160,13 +160,13 @@
         </div>
     </div>
 
-    <form method="post" id="addCart">
+    {{-- <form method="post" id="addCart">
         @csrf
-    </form>
+    </form> --}}
 </section>
 @endsection
 @push('js')
-    <script>
+    {{-- <script>
         $(function() {
             $(document).on("click", ".addToCartGet", function(e) {
                 e.preventDefault();
@@ -174,5 +174,5 @@
                 $("#addCart").attr("action", url).submit();
             });
         });
-    </script>
+    </script> --}}
 @endpush

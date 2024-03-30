@@ -45,13 +45,15 @@ class CartController extends Controller
         $v_titles = [];
         $v_ids = [];
         // dd($request->variants);
-        foreach($request->variants as $variant) {
-            if(count(explode("___",$variant)) == 3) {
-                $v_names[] = explode("___",$variant)[0];
-                $v_titles[] = explode("___",$variant)[1];
-                $v_ids[] = explode("___",$variant)[2];
+        if(is_array($request->variants)){
+            foreach($request->variants as $variant) {
+                if(count(explode("___",$variant)) == 3) {
+                    $v_names[] = explode("___",$variant)[0];
+                    $v_titles[] = explode("___",$variant)[1];
+                    $v_ids[] = explode("___",$variant)[2];
+                }
+                
             }
-            
         }
      
         $added = Cart::add([
