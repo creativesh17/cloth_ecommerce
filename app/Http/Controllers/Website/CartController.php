@@ -40,7 +40,6 @@ class CartController extends Controller
     public function addToCart(Product $product, Request $request) {
 
         // return $product->productvariants;
-
         $v_names = [];
         $v_titles = [];
         $v_ids = [];
@@ -59,7 +58,7 @@ class CartController extends Controller
         $added = Cart::add([
             'id' => $product->id,
             'name' => $product->product_name,
-            'qty' => $request->qty ?: 1 ,
+            'qty' => $request->qty ?: 1,
             'price' => $product->active_price ?: $product->sales_price,
             'weight' => 0,
             'options' => [

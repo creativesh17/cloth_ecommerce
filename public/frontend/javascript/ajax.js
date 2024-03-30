@@ -1,3 +1,15 @@
+function cartItems() {
+    var url = window.origin + '/cartitems';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'HTML',
+        success(data) {
+            $('#cartItems').html(data);
+        }
+    });
+}
+
 $(function () {
 
     $('#addCart').submit(function (e) {
@@ -27,19 +39,6 @@ $(function () {
         });
 
     });
-
-    function cartItems() {
-        var url = window.origin + '/cartitems';
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'HTML',
-            success(data) {
-                $('#cartItems').html(data);
-            }
-        });
-    }
-
 
 
 });
@@ -86,7 +85,8 @@ function modal_cart_form_submit() {
         method: "POST",
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
+        },
+        body: new FormData(event.target)
     })
         .then(res => res.json())
         .then(res => {
@@ -99,6 +99,7 @@ function modal_cart_form_submit() {
                 showConfirmButton: false,
                 timer: 2000
             });
+            cartItems();
         })
 }
 

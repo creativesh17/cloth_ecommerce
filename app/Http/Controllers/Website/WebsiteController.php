@@ -63,8 +63,6 @@ class WebsiteController extends Controller
             ->first();
         // return $product->categories;
 
-
-        // 
         $category = $product->categories()->first();
 
         $productKey = 'product_' . $product->id;
@@ -84,14 +82,17 @@ class WebsiteController extends Controller
         return view('website.pages.product-details', compact('product', 'category',  'revs', 'varaintValues'));
        
     }
+    
 
     public function product_details_modal($id) {
+
         $sumStar = null;
         $product = Product::where('id', $id)
             ->withSum('stocks', 'qty')
             ->withSum('sales', 'qty')
             ->with('product_brand')
             ->first();
+
         $category = $product->categories()->first();
 
         $productKey = 'product_' . $product->id;
