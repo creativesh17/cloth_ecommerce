@@ -421,7 +421,7 @@
 	border:2px solid transparent;
 	position:relative;
 	z-index:99;
-	min-height:435px;
+	min-height: unset;
 	overflow:visible;
 }
 

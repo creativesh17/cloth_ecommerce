@@ -17,7 +17,11 @@
                     <div class="col-lg-3 col-md-4">
                         @include('website.pages.sidemenu')
                     </div>
-
+                    @if(session()->has('access_token'))
+                        <script>
+                            localStorage.setItem('token',`{{session()->get('access_token')}}`);
+                        </script>
+                    @endif
                     <div class="col-lg-9 col-md-8 ">
                         <div class="card">
                             <div class="card-body" style="padding: 20px;">
