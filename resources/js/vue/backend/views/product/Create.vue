@@ -41,6 +41,13 @@
 
                                 <div class="form-group d-grid align-content-start gap-1 mb-2 " >
                                     <input-field
+                                        :label="`Purcahse Price`"
+                                        :name="`purchase_price`"
+                                    />
+                                </div>
+
+                                <div class="form-group d-grid align-content-start gap-1 mb-2 " >
+                                    <input-field
                                         :label="`price`"
                                         :name="`sales_price`"
                                     />

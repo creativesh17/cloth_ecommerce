@@ -18,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::get('/t1',function(){
+    return "t1";
+});
+Route::get('/t2',function(){
+    return "t2";
+});
+Route::post('/t3',function(){
+    return request()->all();
+});
+
 Route::group(
     ['prefix' => 'v1', 'namespace' => 'Controllers'],
     function () {
@@ -37,6 +47,7 @@ Route::group(
         });
 
         Route::group(['middleware' => ['auth:api']], function () {
+        // Route::group(['middleware' => ['guest']], function () {
             Route::group(['prefix' => 'user'], function () {
                 Route::post('/api-logout', 'Auth\ApiLoginController@logout');
                 Route::post('/user_info', 'Auth\ApiLoginController@user_info');
@@ -133,6 +144,44 @@ Route::group(
                 Route::post('/add-to-home-cat','Admin\Product\CategoryController@add_to_home_cat');
                 Route::post('/add-to-nav-cat','Admin\Product\CategoryController@add_to_nav_cat');
                 Route::get('/{id}','Admin\Product\CategoryController@show');
+            });
+
+            Route::group(['prefix' => 'account-category'], function () {
+                Route::get('/all','Admin\Account\AccountCategoryController@all');
+                Route::post('/store','Admin\Account\AccountCategoryController@store');
+                Route::post('/canvas-store','Admin\Account\AccountCategoryController@canvas_store');
+                Route::post('/update','Admin\Account\AccountCategoryController@update');
+                Route::post('/canvas-update','Admin\Account\AccountCategoryController@canvas_update');
+                Route::post('/soft-delete','Admin\Account\AccountCategoryController@soft_delete');
+                Route::post('/destroy','Admin\Account\AccountCategoryController@destroy');
+                Route::post('/restore','Admin\Account\AccountCategoryController@restore');
+                Route::post('/bulk-import','Admin\Account\AccountCategoryController@bulk_import');
+                Route::get('/all-json','Admin\Account\AccountCategoryController@all_json');
+                Route::get('/income-expense','Admin\Account\AccountCategoryController@income_expense');
+                Route::get('/{id}','Admin\Account\AccountCategoryController@show');
+
+                // Route::post('/check-exists','Admin\Product\AccountCategoryController@check_exists');
+                // Route::post('/add-to-top-cat','Admin\Product\AccountCategoryController@add_to_top_cat');
+                // Route::post('/add-to-home-cat','Admin\Product\AccountCategoryController@add_to_home_cat');
+                // Route::post('/add-to-nav-cat','Admin\Product\AccountCategoryController@add_to_nav_cat');
+            });
+
+            Route::group(['prefix' => 'account-log'], function () {
+                Route::get('/all','Admin\Account\AccountLogController@all');
+                Route::post('/store','Admin\Account\AccountLogController@store');
+                Route::post('/canvas-store','Admin\Account\AccountLogController@canvas_store');
+                Route::post('/update','Admin\Account\AccountLogController@update');
+                Route::post('/canvas-update','Admin\Account\AccountLogController@canvas_update');
+                Route::post('/soft-delete','Admin\Account\AccountLogController@soft_delete');
+                Route::post('/destroy','Admin\Account\AccountLogController@destroy');
+                Route::post('/restore','Admin\Account\AccountLogController@restore');
+                Route::post('/bulk-import','Admin\Account\AccountLogController@bulk_import');
+                Route::get('/all-json','Admin\Account\AccountLogController@all_json');
+                Route::get('/{id}','Admin\Account\AccountLogController@show');
+                // Route::post('/check-exists','Admin\Account\AccountLogController@check_exists');
+                // Route::post('/add-to-top-cat','Admin\Account\AccountLogController@add_to_top_cat');
+                // Route::post('/add-to-home-cat','Admin\Account\AccountLogController@add_to_home_cat');
+                // Route::post('/add-to-nav-cat','Admin\Account\AccountLogController@add_to_nav_cat');
             });
 
             Route::group(['prefix' => 'brand'], function () {
@@ -268,6 +317,7 @@ Route::group(
 
             Route::group(['prefix' => 'dashboard'], function () {
                 Route::get('/dashboard_info','Admin\Order\OrderController@dashboard_info');
+                Route::post('/account-reports','Admin\Order\OrderController@report_info_by_date');
             });
 
             Route::group(['prefix' => 'settings'], function () {

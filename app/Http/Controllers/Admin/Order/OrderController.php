@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\Order;
 
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
+use App\Models\AccountLog;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
@@ -41,8 +43,8 @@ class OrderController extends Controller
         }
 
         $query->with([
-            'order_payments' => function($q){
-                return $q->select('payment_method','id','order_id');
+            'order_payments' => function ($q) {
+                return $q->select('payment_method', 'id', 'order_id');
             }
         ]);
 
@@ -52,18 +54,20 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $data = Order::where('id',$id)->with(['order_address', 'order_payments','order_details' => function($q) {
+        $data = Order::where('id', $id)->with(['order_address', 'order_payments', 'order_details' => function ($q) {
             $q->with('product');
         }])->first();
-        if(!$data){
+        if (!$data) {
             return response()->json([
                 'err_message' => 'not found',
-                'errors' => ['role'=>['data not found']],
+                'errors' => ['role' => ['data not found']],
             ], 422);
         }
-        return response()->json($data,200);
+        return response()->json($data, 200);
     }
 
+
+    
     public function store(Request $request)
     {
         $validator = Validator::make(request()->all(), [
@@ -113,10 +117,10 @@ class OrderController extends Controller
     public function update()
     {
         $data = Order::find(request()->id);
-        if(!$data){
+        if (!$data) {
             return response()->json([
                 'err_message' => 'validation error',
-                'errors' => ['name'=>['user_role not found by given id '.(request()->id?request()->id:'null')]],
+                'errors' => ['name' => ['user_role not found by given id ' . (request()->id ? request()->id : 'null')]],
             ], 422);
         }
 
@@ -140,10 +144,10 @@ class OrderController extends Controller
     public function canvas_update()
     {
         $data = Order::find(request()->id);
-        if(!$data){
+        if (!$data) {
             return response()->json([
                 'err_message' => 'validation error',
-                'errors' => ['name'=>['user_role not found by given id '.(request()->id?request()->id:'null')]],
+                'errors' => ['name' => ['user_role not found by given id ' . (request()->id ? request()->id : 'null')]],
             ], 422);
         }
 
@@ -167,7 +171,7 @@ class OrderController extends Controller
     public function soft_delete()
     {
         $validator = Validator::make(request()->all(), [
-            'id' => ['required','exists:categories,id'],
+            'id' => ['required', 'exists:categories,id'],
         ]);
 
         if ($validator->fails()) {
@@ -182,7 +186,7 @@ class OrderController extends Controller
         $data->save();
 
         return response()->json([
-                'result' => 'deactivated',
+            'result' => 'deactivated',
         ], 200);
     }
 
@@ -193,15 +197,70 @@ class OrderController extends Controller
     public function status_update()
     {
         $data = Order::find(request()->id);
-        if(!$data){
+        if (!$data) {
             return response()->json([
                 'err_message' => 'validation error',
-                'errors' => ['name'=>['order not found by given id '.(request()->id?request()->id:'null')]],
+                'errors' => ['name' => ['order not found by given id ' . (request()->id ? request()->id : 'null')]],
             ], 422);
         }
 
         $data->order_status = request()->order_status;
         $data->save();
+
+        function hasPayment($data)
+        {
+            if ($data->account_log_id) {
+                $acLogExists = AccountLog::find($data->account_log_id);
+                if ($acLogExists) {
+                    return [
+                        'status' => true,
+                        'acLogData' => $acLogExists
+                    ];
+                }
+            }
+
+            return [
+                'status' => false,
+                'acLogData' => false
+            ];
+        }
+
+        if ($data->order_status == 'pending' || $data->order_status == 'canceled') {
+            $checked = hasPayment($data);
+            if ($checked['status'] == true) {
+
+                DB::table('account_logs')->insert([
+                    'account_category_id' => 1,
+                    'amount' => $checked['acLogData']->amount,
+                    'amount_in_text' => $checked['acLogData']->amount_in_text ?? NULL,
+                    'type' => 'expense',
+                    'date' => Carbon::now()->toDateString(),
+                    'description' => 'order status ' . $data->status,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                $data->account_log_id = NULL;
+                $data->save();
+            }
+        }
+        if ($data->order_status == 'accepted' || $data->order_status == 'processing' || $data->order_status == 'delivered') {
+            $checked = hasPayment($data);
+            if ($checked['status'] == false) {
+
+                $acLog = AccountLog::create([
+                    'account_category_id' => 1,
+                    'amount' => $data->total_price,
+                    'amount_in_text' => numbers_to_text($data->total_price) ?? NULL,
+                    'type' => 'income',
+                    'date' => Carbon::now()->toDateString(),
+                    'description' => 'order status ' . $data->status,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                $data->account_log_id = $acLog->id;
+                $data->save();
+            }
+        }
 
         return response()->json($data, 200);
     }
@@ -212,13 +271,13 @@ class OrderController extends Controller
 
 
         $total_sales_this_month = Order::where('order_status', 'Accepted')
-        ->whereMonth('created_at', Carbon::now()->month)->sum('total_price');
+            ->whereMonth('created_at', Carbon::now()->month)->sum('total_price');
 
         $total_sales_today = Order::where('order_status', 'Accepted')
-        ->whereMonth('created_at', Carbon::today())->sum('total_price');
+            ->whereMonth('created_at', Carbon::today())->sum('total_price');
 
 
-        $total_customer = User::with(['roles' => function($q) {
+        $total_customer = User::with(['roles' => function ($q) {
             $q->where('role_id', 3);
         }])->count();
         $total_pending_order = Order::where('order_status', 'Pending')->count();
@@ -228,23 +287,23 @@ class OrderController extends Controller
         $top_selling_product = DB::table('products')
             ->whereExists(function ($query) {
                 $query->from('order_details')
-                ->whereColumn('order_details.product_id', 'products.id');
+                    ->whereColumn('order_details.product_id', 'products.id');
             })
-            ->leftJoin('order_details','products.id','=','order_details.product_id')
+            ->leftJoin('order_details', 'products.id', '=', 'order_details.product_id')
             ->selectRaw('products.id, COALESCE(sum(order_details.qty),0) total')
             ->groupBy('products.id')
-            ->orderBy('total','desc')
+            ->orderBy('total', 'desc')
             ->get();
 
         $less_selling_product = DB::table('products')
             ->whereExists(function ($query) {
                 $query->from('order_details')
-                ->whereColumn('order_details.product_id', '!=' ,'products.id');
+                    ->whereColumn('order_details.product_id', '!=', 'products.id');
             })
-            ->leftJoin('order_details','products.id','=','order_details.product_id')
+            ->leftJoin('order_details', 'products.id', '=', 'order_details.product_id')
             ->selectRaw('products.id, COALESCE(sum(order_details.qty),0) total')
             ->groupBy('products.id')
-            ->orderBy('total','desc')
+            ->orderBy('total', 'desc')
             ->get();
 
         $data = [
@@ -261,10 +320,57 @@ class OrderController extends Controller
         return response()->json($data, 200);
     }
 
+    public function order_profit_by_date($startDate, $endDate) {
+
+        $orderProducts = OrderDetails::where('created_at', '>=', $startDate)
+                                    ->where('created_at', '<=', $endDate)
+                                    ->with('product_selected_column')
+                                    ->get();
+
+        $profit_loss_price = 0;
+        foreach($orderProducts as $orderProduct) {
+            if($orderProduct->product_price > 0) {
+                $profit_loss_price += ($orderProduct->product_price - $orderProduct->product_selected_column->purchase_price) * $orderProduct->qty;
+            }
+        }
+        return $profit_loss_price;
+        
+    }
+
+    public function report_info_by_date()
+    {
+        $startDate = Carbon::parse(request()->input('start_date'));
+        $endDate = Carbon::parse(request()->input('end_date'))->endOfDay();
+
+        // $total = AccountLog::where('date', '>=', $startDate)->where('date', '<=', $endDate)->sum('amount');
+        $total_income = AccountLog::where('date', '>=', $startDate)
+            ->where('date', '<=', $endDate)
+            ->where('type', 'income')
+            ->sum('amount');
+        $total_expense = AccountLog::where('date', '>=', $startDate)
+            ->where('date', '<=', $endDate)
+            ->where('type', 'expense')
+            ->sum('amount');
+
+        $income_from_order = AccountLog::where('account_category_id', 1)->where('type', 'income')->sum('amount');
+
+        $net_profit = $total_income - $total_expense;
+
+        $profit_loss_from_order = $this->order_profit_by_date($startDate, $endDate);
+
+        return response()->json([
+            'total_income' => $total_income,
+            'total_expense' => $total_expense,
+            'income_from_order' => $income_from_order,
+            'net_profit' => $net_profit,
+            'profit_loss_from_order' => $profit_loss_from_order,
+        ]);
+    }
+
     public function send_email()
     {
         $order_id = request()->order_id;
-        $order_details = Order::where('id',$order_id)->with(['order_address', 'order_payments','order_details' => function($q) {
+        $order_details = Order::where('id', $order_id)->with(['order_address', 'order_payments', 'order_details' => function ($q) {
             $q->with('product');
         }])->first();
         $emails = json_decode(request()->emails);
@@ -281,7 +387,7 @@ class OrderController extends Controller
     public function restore()
     {
         $validator = Validator::make(request()->all(), [
-            'id' => ['required','exists:categories,id'],
+            'id' => ['required', 'exists:categories,id'],
         ]);
 
         if ($validator->fails()) {
@@ -296,14 +402,14 @@ class OrderController extends Controller
         $data->save();
 
         return response()->json([
-                'result' => 'activated',
+            'result' => 'activated',
         ], 200);
     }
 
     public function bulk_import()
     {
         $validator = Validator::make(request()->all(), [
-            'data' => ['required','array'],
+            'data' => ['required', 'array'],
         ]);
 
         if ($validator->fails()) {
@@ -314,11 +420,11 @@ class OrderController extends Controller
         }
 
         foreach (request()->data as $item) {
-            $item['created_at'] = $item['created_at'] ? Carbon::parse($item['created_at']): Carbon::now()->toDateTimeString();
-            $item['updated_at'] = $item['updated_at'] ? Carbon::parse($item['updated_at']): Carbon::now()->toDateTimeString();
+            $item['created_at'] = $item['created_at'] ? Carbon::parse($item['created_at']) : Carbon::now()->toDateTimeString();
+            $item['updated_at'] = $item['updated_at'] ? Carbon::parse($item['updated_at']) : Carbon::now()->toDateTimeString();
             $item = (object) $item;
-            $check = Order::where('id',$item->id)->first();
-            if(!$check){
+            $check = Order::where('id', $item->id)->first();
+            if (!$check) {
                 try {
                     Order::create((array) $item);
                 } catch (\Throwable $th) {

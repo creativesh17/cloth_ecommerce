@@ -60,11 +60,11 @@ class AppServiceProvider extends ServiceProvider
 
             // $setting = \App\Models\Setting::select($cols)->first();
             $setting = \App\Models\Setting::first();
-            $topCate = \App\Models\Category::where('is_top_category', 1)->orderBy("id","asc")->limit(24)->get();
+            // $topCate = \App\Models\Category::where('is_top_category', 1)->orderBy("id","asc")->limit(24)->get();
             $mostViewProducts = \App\Models\Product::where('status', 1)->where('view_count', '>', 0)->orderBy('view_count', 'DESC')->latest()->limit(12)->get();
             $view->with([
                 'setting' => $setting,
-                'topCate' => $topCate,
+                // 'topCate' => $topCate,
                 'mostViewProducts' => $mostViewProducts,
             ]);
         });

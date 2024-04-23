@@ -26,9 +26,15 @@
                 @foreach($cate->childrens as $child)
 
                 <div class="one-third category-show" >
-                        <div class="cat-title">
-                            {{ $child->name }}
+                    @if ($child->childrens->count())
+                    <div class="cat-title">
+                        <a href="{{ route('category_product', $child->slug) }}">{{ $child->name }}</a>
+                    </div>
+                    @else
+                        <div>
+                            <a href="{{ route('category_product', $child->slug) }}">{{ $child->name }}</a>
                         </div>
+                    @endif
 
                         {{-- @dd($child->childrens) --}}
 

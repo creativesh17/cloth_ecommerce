@@ -23,6 +23,8 @@ import variant_modules from './modules/variant_modules';
 import gallery_modules from './modules/gallery_modules';
 import product_review_modules from './modules/product_review_modules';
 import product_question_modules from './modules/product_question_modules';
+import account_category_modules from './modules/account_category_modules';
+import account_log_modules from './modules/account_log_modules';
 
 const store = new Vuex.Store({
     modules: {
@@ -46,6 +48,8 @@ const store = new Vuex.Store({
         gallery_modules,
         product_review_modules,
         product_question_modules,
+        account_category_modules,
+        account_log_modules,
     },
     state: {},
     getters: {},

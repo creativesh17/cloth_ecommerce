@@ -18,4 +18,10 @@ class OrderDetails extends Model
     {
         return $this->hasOne(Product::class, 'id', 'product_id');
     }
+
+    public function product_selected_column()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id')
+            ->select('id', 'sales_price', 'purchase_price');
+    }
 }

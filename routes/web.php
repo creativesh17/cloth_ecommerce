@@ -146,6 +146,17 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
 
 });
 
+Route::get('/insert/purcahse-price', function() {
+    $products = Product::all();
+    foreach($products as $product) {
+        if(!$product->sales_price || $product->sales_price < 1000) {
+            $product->sales_price = rand(4000, 5000);
+        }
+        $product->purchase_price = $product->sales_price - rand(50, 100);
+        $product->save();
+    }
+})->name('route.eft');
+
 Route::prefix('old/2/2')->namespace('Controllers')->group(function () {
     Route::get('/', 'Website\WebsiteController@home');
     Route::get('/about-us', "WebsiteController@aboutus")->name('about_us');

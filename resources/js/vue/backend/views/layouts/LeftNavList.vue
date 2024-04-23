@@ -25,7 +25,8 @@
                 <span data-i18n="Apps &amp; Pages">Product managements</span>
             </li>
 
-            <left-nav-list-group :role_permissions="['super_admin','admin']" :icon="`fa fa-box`" :text="`Product`" :alert_count="0">
+            <left-nav-list-group :role_permissions="['super_admin','admin']" 
+            :icon="`fa fa-box`" :text="`Product`" :alert_count="0">
                 <left-nav-list-item :to="'CreateProduct'" :text="'Create product'" />
                 <left-nav-list-item :to="'AllProduct'" :text="'Product Lists'" />
                 <left-nav-list-item :to="'SetProductVarient'" :text="'Set Product Varient'" />
@@ -73,8 +74,13 @@
                 <left-nav-list-item :to="'AllCustomer'" :text="'customer Lists'" />
             </left-nav-list-group>
 
+            <left-nav-list-group :role_permissions="['super_admin','admin']" :icon="`fa fa-box`" :text="`Account`" :alert_count="0">
+                <left-nav-list-item :to="'AllAccountCategory'" :text="'Account Categories'" />
+                <left-nav-list-item :to="'AllAccountLog'" :text="'Account Logs'" />
+            </left-nav-list-group>
+
             <li class="navigation-header">
-                <span data-i18n="Apps &amp; Pages">Website management</span>
+                <span data-i18n="Apps &amp; Pages">Website Management</span>
             </li>
             <left-nav-list-group :role_permissions="['super_admin','admin']" :icon="`fa fa-list`" :text="`Banners`" :alert_count="0">
                 <left-nav-list-item :to="'CreateBanner'" :text="'Create Banner'" />

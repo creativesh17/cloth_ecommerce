@@ -22,7 +22,8 @@ class WebsiteController extends Controller
     public function home() {
         // Cart::destroy();
         // dd(Carbon::now()->subDay());
-        return view('website.layouts.home');
+        $topCateAll = Category::where('is_top_category', 1)->orderBy("id","asc")->limit(8)->get();
+        return view('website.layouts.home', compact('topCateAll'));
     }
 
     public function aboutus() {

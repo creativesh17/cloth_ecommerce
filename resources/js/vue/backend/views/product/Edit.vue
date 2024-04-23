@@ -34,6 +34,14 @@
 
                                 <div class=" form-group d-grid align-content-start gap-1 mb-2 " >
                                     <input-field
+                                        :label="`Purchase Price`"
+                                        :name="`purchase_price`"
+                                        :value="this[`get_${store_prefix}`]['purchase_price']"
+                                    />
+                                </div>
+
+                                <div class=" form-group d-grid align-content-start gap-1 mb-2 " >
+                                    <input-field
                                         :label="`Price`"
                                         :name="`sales_price`"
                                         :value="this[`get_${store_prefix}`]['sales_price']"

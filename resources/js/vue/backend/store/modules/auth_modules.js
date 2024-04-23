@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { error } from 'jquery';
 
 // state list
 const state = {
@@ -33,7 +34,8 @@ const actions = {
                 this.commit('set_check_auth', false);
                 window.localStorage.removeItem('token');
                 console.log('user not authenticated');
-                window.location.href = '/login';
+                // window.location.href = '/login';
+                console.log(err);
             })
     },
     update_user_info: async function(state, data) {

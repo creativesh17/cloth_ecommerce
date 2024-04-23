@@ -21,6 +21,9 @@ import variant_route from './dashboard_routes/variant_route'
 import gallery_route from './dashboard_routes/gallery_route'
 import product_question from './dashboard_routes/product_question'
 import product_review from './dashboard_routes/product_review'
+import account_category_route from './dashboard_routes/account_category_route'
+import account_log_route from './dashboard_routes/account_log_route'
+
 
 Vue.use(VueRouter);
 window.Fire = new Vue();
@@ -49,6 +52,9 @@ const routes = [{
             gallery_route,
             product_question,
             product_review,
+            account_category_route,
+            account_log_route,
+
         ]
     },
     {

@@ -10,8 +10,8 @@
         <div class="row ">
             <div class="col-md-12 ">
                 <div class="d-flex flex-wrap gap-3">
-                    {{-- @dd($topCate) --}}
-                    @foreach ($topCate as $cate)
+                    {{-- @dd($topCateAll) --}}
+                    @foreach ($topCateAll as $cate)
                         @if (isset($cate->category_image))
                             <div class="top_category_item">
                                 <div class="cat_imagebox">

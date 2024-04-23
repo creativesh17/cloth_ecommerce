@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DiscountProductSeeder extends Seeder
 {
@@ -13,6 +15,10 @@ class DiscountProductSeeder extends Seeder
      * @return void
      */
     public function run() {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('discount_products')->truncate();
+
         DB::table('discount_products')->insert([
             'product_id' => 1,
             'main_price' => 2139.90,
@@ -22,6 +28,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 2,
             'main_price' => 1611.75,
@@ -31,6 +38,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        
         DB::table('discount_products')->insert([
             'product_id' => 3,
             'main_price' => 2921.10,
@@ -40,6 +48,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 4,
             'main_price' => 2783.55,
@@ -49,6 +58,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 5,
             'main_price' => 928.00,
@@ -58,6 +68,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 6,
             'main_price' => 3409.00,
@@ -67,6 +78,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 7,
             'main_price' => 2588.00,
@@ -76,6 +88,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 8,
             'main_price' => 6827.00,
@@ -85,6 +98,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 9,
             'main_price' => 7472.09,
@@ -94,6 +108,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 10,
             'main_price' => 7472.09,
@@ -103,6 +118,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         DB::table('discount_products')->insert([
             'product_id' => 11,
             'main_price' => 50.00,
@@ -112,6 +128,7 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
         // 
         DB::table('discount_products')->insert([
             'product_id' => 24,
@@ -123,6 +140,7 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         // 
+
         DB::table('discount_products')->insert([
             'product_id' => 25,
             'main_price' => 12924.00,
@@ -133,6 +151,7 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         // 
+
         DB::table('discount_products')->insert([
             'product_id' => 26,
             'main_price' => 3564.00,
@@ -143,6 +162,7 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         // 
+
         DB::table('discount_products')->insert([
             'product_id' => 27,
             'main_price' => 1260.00,
@@ -153,6 +173,7 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         // 
+
         DB::table('discount_products')->insert([
             'product_id' => 28,
             'main_price' => 21976.00,
@@ -163,6 +184,7 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         // 
+
         DB::table('discount_products')->insert([
             'product_id' => 29,
             'main_price' => 11671.00,
@@ -173,6 +195,7 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         // 
+
         DB::table('discount_products')->insert([
             'product_id' => 30,
             'main_price' => 1970.00,
@@ -183,6 +206,7 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         // 
+
         DB::table('discount_products')->insert([
             'product_id' => 31,
             'main_price' => 19995.00,
@@ -192,5 +216,6 @@ class DiscountProductSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        
     }
 }
