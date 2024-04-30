@@ -73,14 +73,14 @@
         </ul>
 
         <div class="col-md-12 ">
-            @php
-                $brandAlls = \App\Models\Brand::where('status', 1)->latest()->limit(12)->get();
-            @endphp
+            {{-- @php
+                $brandAll = \App\Models\Brand::where('status', 1)->latest()->limit(12)->get();
+            @endphp --}}
             <div class="col-md-12 bread-brand">
                 <ul class="child-list my-2 d-flex flex-wrap gap-2">
-                    @foreach ($brandAlls as $brand)
+                    @foreach ($brandAll as $brand)
                     <li>
-                        <a href="{{ route('productsByBrands', $brand->id)  }}">
+                        <a href="{{ route('productsByBrands', $brand->url)  }}">
                             {{ $brand->name }}
                         </a>
                     </li>
@@ -214,7 +214,7 @@
                                     <tr>
                                         <td>Brand<br></td>
                                         <td>
-                                            <a href="{{ route('productsByBrands', $product->brand->id) }}">
+                                            <a href="{{ route('productsByBrands', $product->brand->url) }}">
                                                 {{ $product->brand->name }}
                                             </a><br>
                                         </td>
@@ -583,26 +583,7 @@
                     @foreach($product->categories()->latest()->get() as $key=>$item)
                         @if ($item->products()->count())
                             @foreach ($item->products()->paginate(3)->items() as $r_product)
-                            {{-- <div class="imagebox style4">
-                                <div class="box-image">
-                                    <a href="#" title="">
-                                        <img src="{{ $r_product->related_images[0]['image_link'] }}"/>
-                                    </a>
-                                </div><!-- /.box-image -->
-                                <div class="box-content">
-                                    <div class="cat-name">
-                                        <a href="#" title="">Laptops</a>
-                                    </div>
-                                    <div class="product-name">
-                                        <a href="{{ $r_product->product_url }}">
-                                            {{ $r_product->product_name }}
-                                        </a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="sale">{{ $r_product->sales_price }} ৳</span>
-                                    </div>
-                                </div><!-- /.box-content -->
-                            </div> --}}
+                            
                                 @include('website.components.product_box', [
                                     'product' => $r_product,
                                 ])

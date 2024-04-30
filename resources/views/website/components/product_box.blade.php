@@ -7,7 +7,7 @@
         </div><!-- /.box-image -->
         <div class="box-content my-box-content">
             <div class="cat-name">
-                <a href="{{ url('product/' . $product->id) }}" title="">
+                <a href="{{ url('product/'.$product->product_url) }}" title="">
                     @php
                         $dcount = 0;
                     @endphp
@@ -25,8 +25,7 @@
         </div>
         <div class="product-name">
 
-            <a href="{{ url('product/' . $product->id) }}"
-                title="">{{ substr($product->product_name, 0, 35) }}</a><br>
+            <a href="{{ url('product/'.$product->product_url) }}" title="">{{ substr($product->product_name, 0, 35) }}</a><br>
             {{-- @dd(S::substr($product->product_name, 15)) --}}
         </div>
 
@@ -49,7 +48,7 @@
     <div class="box-bottom">
         <div class="btn-add-cart">
             <a id="showProduct" href="#" data-toggle="modal" data-target="#myShowProduct" data-id="{{ $product->id }}">
-                <img src="/frontend/images/icons/add-cart.png" alt="">
+                <img src="{{ asset('frontend/images/icons/add-cart.png') }}" alt="">
                 Buy Now
             </a>
         </div>

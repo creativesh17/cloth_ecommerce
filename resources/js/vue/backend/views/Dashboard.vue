@@ -304,7 +304,7 @@
                                                 accounts_statistics.data.profit_loss_from_order
                                             }}
                                         </h5>
-                                        <small :class="accounts_statistics.data.profit_loss_from_order < 0? 'text-warning': 'text-success'">Profit or Loss Only fromOrder</small>
+                                        <small :class="accounts_statistics.data.profit_loss_from_order < 0? 'text-warning': 'text-success'">Profit or Loss Only from Order</small>
                                     </div>
                                 </div>
                             </div>

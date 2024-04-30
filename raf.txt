@@ -109,25 +109,9 @@ https://www.jqueryscript.net/demo/Feature-rich-Product-Gallery-With-Image-Zoom-x
 
 ///////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
 14. reset password
 
-
-
 402 - 26 - 269
-
-
 
 
 /////////////////////////////////////////////
@@ -159,3 +143,48 @@ https://www.sailor.clothing/category/mens-panjabi?id=mens-panjabi
 https://www.aarong.com/men
 https://www.sailor.clothing/category/mens-panjabi?id=mens-panjabi
 https://www.lerevecraze.com/product-category/men/panjabi/
+
+
+
+
+
+
+
+
+
+
+
+1. orWhere from route product_url   and details page
+2. search a tag display=block
+    .search_list_product_title {
+        display: block;
+    }
+3. brand id ke url banaisi ar query sob controller e niesi -> Recent Product
+4. product_box e url hobe id bodole
+5. custom.css - top category - 
+    .top_category_image {
+        height: 67px;
+        width: 67px;
+        object-fit: cover;
+    }
+
+6. special offer -
+    
+    .count-down .square .numb {
+        font-size: 19px;
+    }
+
+7. $specialProducts -> home.blade.php  
+
+8. footer -> sitemap(blade and url) -> kisu name add kora hoy ni ta add korte hobe(footer liinke)
+   sei sathe custom css thik korte hobe
+
+9.  web.php -> 450 -> admin thik koren
+
+10. post->login_> website_login -> redirect() jodi role_id 1, 2 hoy
+
+11. public->frontend->javascript->my-login.js -> 13-14 line etheke sign baad
+
+12. footer kaj custom.css soho
+
+13. category images thik koresi

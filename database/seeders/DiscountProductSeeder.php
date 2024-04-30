@@ -217,5 +217,6 @@ class DiscountProductSeeder extends Seeder
             'updated_at' => now(),
         ]);
         
+        Schema::enableForeignKeyConstraints();
     }
 }

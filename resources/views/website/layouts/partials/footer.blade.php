@@ -96,37 +96,37 @@
                 </div>
                 <ul>
                     <li>
-                        <a href="#" title="">
+                        <a href="{{ route('contact') }}" title="">
                             Contact us
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="">
+                        <a href="{{ route('sitemap') }}" title="">
                             Site Map
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="">
+                        <a href="{{ route('profile') }}" title="">
                             My Account
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="">
+                        <a href="{{ route('wishlist') }}" title="">
                             Wish List
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/about-us') }}" title="">
+                        <a href="{{ route('about_us') }}" title="">
                             About Us
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/privacy/policy') }}" title="">
+                        <a href="{{ route('privacy.policy') }}" title="">
                             Privacy Policy
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('/terms') }}" title="">
+                        <a href="{{ route('terms') }}" title="">
                             Terms & Conditions
                         </a>
                     </li>
@@ -189,16 +189,25 @@
 </div><!-- /.container -->
 </footer><!-- /footer -->
 
-<section class="footer-bottom">
+<section class="footer-bottom p-0">
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             {{-- <p class="copyright"> All Rights Reserved © Techno Store 2017</p> --}}
             {{-- @dd($setting->terms_condition) --}}
-            <p class="copyright"> {{ $setting->copyright }}</p>
+            <p class="copyright mb-0"> {{ $setting->copyright }}</p>
+        </div>
+        <div class="col-md-6">
+            {{-- <p>
+                Developed and Maintained by <a href="">Tech Park It Limited</a>
+            </p> --}}
+            <p class="text-right mb-0 pt-1">
+                Developed and Maintained by <a href="https://techparkit.org" class="text-danger">Tech Park It Solution</a>
+            </p>
+
             <p class="btn-scroll">
                 <a href="#" title="">
-                    <img src="{{ asset('frontend') }}/images/icons/top.png" alt="">
+                    <img src="{{ asset('frontend') }}/images/icons/top.png" class="mb-0" alt="">
                 </a>
             </p>
         </div><!-- /.col-md-12 -->
@@ -209,16 +218,5 @@
 
 
 @push('js_plugin')
-<script>
-// $(function() {
-//     $(document).on('click', '.addtocart', function(e) {
-//         e.preventDefault();
 
-//         var url = $(this).attr('href');
-//         // alert(url);
-//         $('#addCart').attr('action', url).submit();
-
-//     });
-// });
-</script>
 @endpush 

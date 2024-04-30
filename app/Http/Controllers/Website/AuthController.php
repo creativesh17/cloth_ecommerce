@@ -28,19 +28,7 @@ class AuthController extends Controller
     }
 
     public function website_login(Request $request) {
-        // dd($request->all());
-        // $validator = Validator::make($request->all(), [
-        //     'email' => ['required', 'email'],
-        //     'password' => ['required'],
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'err_message' => 'validation error',
-        //         'data' => $validator->errors(),
-        //     ], 422);
-        // }
-
+        
         session()->forget('access_token');
 
         $this->validate(request(), [
@@ -63,6 +51,7 @@ class AuthController extends Controller
             auth()->login($user);
             if ($user->roles()->whereIn('role_serial', [1, 2])->first()) {
                 session()->put('access_token', $user->createToken('accessToken')->accessToken);
+                return redirect('/admin');
             }
             return redirect('/profile');
         }

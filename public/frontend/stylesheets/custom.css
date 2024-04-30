@@ -60,8 +60,9 @@
   margin-top: 5px;
 }
 .top_category_image {
-  height: 50px;
-  width: 50px;
+  height: 67px;
+  width: 67px;
+  object-fit: cover;
 }
 th .wishlist_1 {
   text-align: center;
@@ -375,4 +376,37 @@ span .error {
   line-height: 209px;
   height: 209px;
   overflow: hidden;
+}
+
+.search_list_product_title {
+  display: block;
+}
+
+.count-down .square .numb {
+  font-size: 19px;
+}
+
+.sitemap_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.sitemap_list li a {
+  color: #f28b00;
+}
+
+.sitemap_list li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom .btn-scroll {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 5;
+}
+
+
+.gap-2 {
+  gap: 15px;
 }

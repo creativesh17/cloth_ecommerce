@@ -25,10 +25,10 @@
         
     </section>
 
-    @php
+    {{-- @php
         $brandAll = \App\Models\Brand::where('status', 1)->latest()->limit(222)->get();
-        $storeBrand = null;
-    @endphp
+        // $storeBrand = null;
+    @endphp --}}
     <main id="shop">
         <div class="container">
             <div class="row">
@@ -86,10 +86,10 @@
                     </div>
                 </div><!-- /.col-md-12 -->
             </div><!-- /.row -->
-            @php
+            {{-- @php
                 $latestProducts = \App\Models\Product::where('status', 1)->limit(10)->latest()->get();
                 // dd($latestProducts)
-            @endphp
+            @endphp --}}
 
             <div class="row">
                 <div class="col-md-12">

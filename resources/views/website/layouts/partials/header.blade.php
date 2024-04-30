@@ -209,121 +209,18 @@
                                 </ul><!-- /.submenu -->
                             </li><!-- /.column-1 -->
                             @endforeach
-                            <li class="column-1">
-                                <a href="{{ url('contact') }}" title="">Contact</a>
-                            </li><!-- /.column-1 -->
                         </ul><!-- /.menu -->
 
-                            
-                            {{-- <li class="column-1">
-                                <a href="#" title="">Features</a>
-                                <ul class="submenu">
-                                    <li>
-                                        <a href="#" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Home Theater Systems</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Receivers & Amplifiers</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Speakers</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>CD Players & Turntables</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>High-Resolution Audio</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>4K Ultra HD TVs</a>
-                                    </li>
-                                </ul><!-- /.submenu -->
-                            </li><!-- /.column-1 -->
-                            <li class="has-mega-menu">
-                                <a href="#" title="">Electronic</a>
-                            </li><!-- /.has-mega-menu -->
-                            <li class="column-1">
-                                <a href="#" title="">Pages</a>
-                                <ul class="submenu">
-                                    <li>
-                                        <a href="about.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>About</a>
-                                    </li>
-                                    <li>
-                                        <a href="404.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>404 Page</a>
-                                    </li>
-                                    <li>
-                                        <a href="brands.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Brands Page</a>
-                                    </li>
-                                    <li>
-                                        <a href="categories.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Categories 01</a>
-                                    </li>
-                                    <li>
-                                        <a href="categories-v2.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Categories 02</a>
-                                    </li>
-                                    <li>
-                                        <a href="element.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Element</a>
-                                    </li>
-                                    <li>
-                                        <a href="faq.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>FAQ</a>
-                                    </li>
-                                    <li>
-                                        <a href="order-tracking.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Order Tracking</a>
-                                    </li>
-                                    <li>
-                                        <a href="term-condition.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Terms & Conditions</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product.html" title=""><i class="fa fa-angle-right"
-                                                aria-hidden="true"></i>Single Product 01</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product-v2.html" title=""><i
-                                                class="fa fa-angle-right" aria-hidden="true"></i>Single Product
-                                            02</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product-v3.html" title=""><i
-                                                class="fa fa-angle-right" aria-hidden="true"></i>Single Product
-                                            03</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product-v4.html" title=""><i
-                                                class="fa fa-angle-right" aria-hidden="true"></i>Single Product
-                                            04</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product-v5.html" title=""><i
-                                                class="fa fa-angle-right" aria-hidden="true"></i>Single Product
-                                            05</a>
-                                    </li>
-                                </ul><!-- /.submenu -->
-                            </li><!-- /.column-1 -->
-                            <li class="column-1">
-                                <a href="blog.html" title="">Blog</a>
-                            </li><!-- /.column-1 -->
-                            <li class="column-1">
-                                <a href="contact.html" title="">Contact</a>
-                            </li><!-- /.column-1 -->
-                            @endforeach
-                        </ul><!-- /.menu --> --}}
+                        
                     </div><!-- /.mainnav -->
                 </div><!-- /.nav-wrap -->
-                <div class="today-deal">
-                    <a href="{{ url('/about-us') }}" title="">About Us</a>
+                <div class="today-deal d-flex gap-2" style="">
+                    <div>
+                        <a href="{{ route('about_us') }}" title="">About Us</a>                    
+                    </div>
+                    <div>
+                        <a href="{{ route('contact') }}" title="">Contact</a>
+                    </div>
                 </div><!-- /.today-deal -->
                 <div class="btn-menu">
                     <span></span>

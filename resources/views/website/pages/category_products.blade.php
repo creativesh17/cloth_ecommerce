@@ -77,10 +77,9 @@
         @endisset
     </section>
 
-    @php
+    {{-- @php
         $brandAll = \App\Models\Brand::where('status', 1)->latest()->limit(222)->get();
-        $storeBrand = null;
-    @endphp
+    @endphp --}}
     <main id="shop">
         <div class="container">
             <div class="row">

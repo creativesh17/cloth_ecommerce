@@ -30,24 +30,25 @@ class ProductController extends Controller
 
     public function productsearch(Request $request) {
         $output = '';
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $search = $request->get('search');
-            if($search != '') {
+            if ($search != '') {
                 $products = Product::where('status', 1)
-                ->where('product_name', 'LIKE', '%' . $search . '%')
-                ->orWhere('search_keywords', 'LIKE', '%' . $search . '%')
-                ->orderBy('id', 'desc')
-                ->limit(4)->get();
+                    ->where(function ($q) use ($search) {
+                        $q->where('product_name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('product_url', 'LIKE', '%' . $search . '%')
+                            ->orWhere('search_keywords', 'LIKE', '%' . $search . '%');
+                    })
+
+                    ->orderBy('id', 'desc')
+                    ->limit(4)->get();
             } else {
                 return '';
             }
 
             return view('website.components.ajax_search_result', compact('products'));
-
         }
-
     }
-
 
     public function productSearchPage(Request $request) {
         $search = request()->get('search');

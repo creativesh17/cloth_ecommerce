@@ -37,9 +37,9 @@
 
 {{-- Special Offer --}}
 {{-- countdown available at Hungery Coder --}}
-@php
+{{-- @php
     $specialProducts = \App\Models\Product::has('discount')->get();
-@endphp
+@endphp --}}
 
 <section class="flat-imagebox style3">
     <div class="container">

@@ -8,7 +8,7 @@
             </div>
             <div class="info-product">
                 <div class="name">
-                    <a href="{{ route('product_details_page', $product->id) }}" title="">
+                    <a href="{{ route('product_details_page', $product->product_url) }}" class="search_list_product_title" title="">
                         {{ $product->product_name }}
                     </a>
                 </div>

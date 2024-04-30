@@ -23,10 +23,11 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
 
     // terms - about us - policy
     Route::get('/about-us', "Website\WebsiteController@aboutus")->name('about_us');
-    Route::get('/privacy/policy', "Website\WebsiteController@privacy_policy")->name('privacy.policy');
-    Route::get('/terms', "Website\WebsiteController@terms")->name('terms');
+    Route::get('/privacy-policy', "Website\WebsiteController@privacy_policy")->name('privacy.policy');
+    Route::get('/terms-conditions', "Website\WebsiteController@terms")->name('terms');
     Route::get('/contact', "Website\WebsiteController@contact")->name('contact');
     Route::post('/contact', "Website\WebsiteController@contact_store")->name('contact.store');
+    Route::get('/sitemap', "Website\WebsiteController@sitemap")->name('sitemap');
 
 
     // AuthController - includes both Auth and Orders and Reviews
@@ -58,7 +59,7 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
     Route::get('/product/search/page', 'Website\ProductController@productSearchPage')->name('product.search.page');
 
     // Cart
-    Route::get('cart', 'Website\CartController@index');
+    Route::get('cart', 'Website\CartController@index')->name('cart');
     Route::post('cart/add/{product}', 'Website\CartController@addToCart')->name('cart.add');
     Route::get('cartitems', 'Website\CartController@cartItems');
 
@@ -73,7 +74,7 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
 
 
     // checkout
-    Route::get('/checkout', 'Website\CheckoutController@checkout');
+    Route::get('/checkout', 'Website\CheckoutController@checkout')->name('checkout');
     Route::post('/checkout', 'Website\CheckoutController@store');
     Route::get('/order-complete/{id}', 'Website\CheckoutController@order_complete');
     Route::post('product/review', 'Website\ReviewController@review')->name('review.new');
@@ -81,9 +82,9 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
 
 
     Route::get('/category/{slug}', 'Website\WebsiteController@category_product')->name('category_product');
-    Route::get('/brand/{id}', 'Website\WebsiteController@productsByBrands')->name('productsByBrands');
-    Route::get('/product/{id}', 'Website\WebsiteController@product_details')->name('product_details_page');
-    Route::get('/product-details-modal/{id}', 'Website\WebsiteController@product_details_modal');
+    Route::get('/brand/{url}', 'Website\WebsiteController@productsByBrands')->name('productsByBrands');
+    Route::get('/product/{url}', 'Website\WebsiteController@product_details')->name('product_details_page');
+    Route::get('/product-details-modal/{id}', 'Website\WebsiteController@product_details_modal')->name('product_details_modal');
     Route::get('/clear/compare', 'Website\CompareController@clear_compare_all')->name('clear.compare');
     Route::get('/clear/item/compare/{id}', 'Website\CompareController@clear_compare_item')->name('remove.compare.item');
 
@@ -92,7 +93,7 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
 
 
     // search by brand
-    Route::get('/productsByBrands/{id}', 'Website\WebsiteController@productsByBrands')->name('productsByBrands');
+    // Route::get('/productsByBrands/{id}', 'Website\WebsiteController@productsByBrands')->name('productsByBrands');
 
 
     Route::get('products-range', function () {
@@ -149,9 +150,9 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
 Route::get('/insert/purcahse-price', function() {
     $products = Product::all();
     foreach($products as $product) {
-        if(!$product->sales_price || $product->sales_price < 1000) {
-            $product->sales_price = rand(4000, 5000);
-        }
+        // if(!$product->sales_price || $product->sales_price < 1000) {
+        //     $product->sales_price = rand(2000, 4000);
+        // }
         $product->purchase_price = $product->sales_price - rand(50, 100);
         $product->save();
     }
@@ -444,6 +445,9 @@ Route::group(['prefix' => '', 'namespace' => "Controllers"], function () {
 });
 
 Route::get('/admin', function () {
+    if(!Auth::check()) {
+        return redirect()->route('login');
+    }
     $user = \App\Models\User::find(auth()->user()->id);
     $role = $user->roles()->whereIn('role_serial', [1, 2])->first();
     if ($role) {
