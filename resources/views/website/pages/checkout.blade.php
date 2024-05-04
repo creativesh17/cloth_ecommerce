@@ -13,82 +13,118 @@
     $subtotal = 0;
 @endphp
 @section('content')
-    
     @include('website.layouts.partials.breadcrumb')
 
     <section class="flat-checkout">
         <div class="container">
             <form action="{{ url('/checkout') }}" method="POST" class="checkout" accept-charset="utf-8">
-            @csrf
-            <div class="row">
+                @csrf
+                <div class="row">
                     <div class="col-md-7">
                         <div class="box-checkout">
-                            <h3 class="title">Checkout</h3>
+                            {{-- <h3 class="title">Checkout</h3>
                             <div class="checkout-login">
                                 <a href="{{ url('/login') }}" title="">Click here to login</a> OR
                                 <a href="{{ url('/register') }}" title="">Create an account?</a>
-                            </div>
+                            </div> --}}
 
                             <div class="billing-fields">
                                 <div class="fields-title">
-                                    <h2>Customer Information</h2>
+                                    <h2>Checkout Information</h2>
                                     <span><br></span>
                                     <div class="clearfix"></div>
                                 </div><!-- /.fields-title -->
                                 <div class="fields-content">
-                                    <div class="field-row p_star {{ $errors->has('ship_name') ? ' has-error' : '' }}">
-                                        <p class="field-one-half">
-                                            <label for="ship_name">Full Name *</label>
-                                            <input type="text" id="ship_name" name="ship_name" value="{{ old('ship_name') }}" placeholder="Ali Khan">
-                                            @if ($errors->has('ship_name'))
-                                                <span class="invalid-feedback">
-                                                    <b>{{ $errors->first('ship_name') }}</b>
-                                                </span>
-                                            @endif
-                                        </p>
-                                        {{-- <p class="field-one-half">
-                                        <label for="last-name">Last Name *</label>
-                                        <input type="text" id="last-name" name="last-name" placeholder="Tufan">
-                                    </p> --}}
-                                        {{-- <div class="clearfix"></div> --}}
-                                    </div>
-                                    <div class="field-row{{ $errors->has('ship_email') ? ' has-error' : '' }}">
-                                        <p class="field-one-half">
-                                            <label for="ship_email">Email Address *</label>
-                                            <input type="email" id="ship_email" name="ship_email" value="{{ old('ship_email') }}">
-                                            @if ($errors->has('ship_email'))
-                                                <span class="invalid-feedback">
-                                                    <b>{{ $errors->first('ship_email') }}</b>
-                                                </span>
-                                            @endif
-                                        </p>
-                                    </div>
-                                    <div class="field-row{{ $errors->has('ship_phone') ? ' has-error' : '' }}">
-                                        <p class="field-one-half">
-                                            <label for="ship_phone">Phone *</label>
-                                            <input type="text" id="ship_phone" name="ship_phone" value="{{ old('ship_phone') }}">
-                                            @if ($errors->has('ship_phone'))
-                                                <span class="invalid-feedback">
-                                                    <b>{{ $errors->first('ship_phone') }}</b>
-                                                </span>
-                                            @endif
-                                        </p>
-                                    </div>
-                                    <div class="clearfix"></div><br>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class=" p_star {{ $errors->has('ship_name') ? ' has-error' : '' }}">
+                                                <div class="field-one-half">
+                                                    <label for="ship_name">Full Name *</label>
+                                                    <input type="text" id="ship_name" name="ship_name"
+                                                        value="{{ old('ship_name') }}" placeholder="Ali Khan">
+                                                    @if ($errors->has('ship_name'))
+                                                        <span class="invalid-feedback">
+                                                            <b>{{ $errors->first('ship_name') }}</b>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div class="field-row{{ $errors->has('ship_address') ? ' has-error' : '' }}">
-                                        <label for="ship_address">Address *</label>
+                                        <div class="col-lg-6 p-2">
+                                            <div class="mb-0 {{ $errors->has('ship_email') ? ' has-error' : '' }}">
+                                                <div class="field-one-half">
+                                                    <label for="ship_email">Email Address *</label>
+                                                    <input class="mr-0" type="email" id="ship_email" name="ship_email"
+                                                        value="{{ old('ship_email') }}">
+                                                    @if ($errors->has('ship_email'))
+                                                        <span class="invalid-feedback">
+                                                            <b>{{ $errors->first('ship_email') }}</b>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        {{-- <input type="text" id="address" name="address" placeholder="Street address">
-                                    <input type="text" id="address-2" name="address" placeholder="Apartment, suite, unit etc. (optional)"> --}}
+                                        <div class="col-lg-6">
+                                            <div class="{{ $errors->has('ship_phone') ? ' has-error' : '' }}">
+                                                <div class="field-one-half">
+                                                    <label for="ship_phone">Mobile *</label>
+                                                    <input type="text" id="ship_phone" name="ship_phone"
+                                                        value="{{ old('ship_phone') }}">
+                                                    @if ($errors->has('ship_phone'))
+                                                        <span class="invalid-feedback">
+                                                            <b>{{ $errors->first('ship_phone') }}</b>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <textarea id="add1" name="ship_address" placeholder="Address" class="form-control">{{ old('ship_address') }}</textarea>
-                                        @if ($errors->has('ship_address'))
-                                            <span class="invalid-feedback">
-                                                <b>{{ $errors->first('ship_address') }}</b>
-                                            </span>
-                                        @endif
+                                        <div class="col-lg-6 p-2">
+                                            <div class=" {{ $errors->has('division') ? ' has-error' : '' }} ">
+                                                <div class="field-one-half">
+                                                    <label for="division">Division</label>
+                                                    <select onchange="set_district(event.target.value)" id="division" name="division" class="form-control"></select>
+                                                    @if ($errors->has('division'))
+                                                        <span class="invalid-feedback">
+                                                            <b>{{ $errors->first('division') }}</b>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 p-2">
+                                            <div class="{{ $errors->has('district') ? ' has-error' : '' }}">
+                                                <div class="field-one-half">
+                                                    <label for="district">District</label>
+                                                    <select id="district" name="district" class="form-control"></select>
+                                                    @if ($errors->has('district'))
+                                                        <span class="invalid-feedback">
+                                                            <b>{{ $errors->first('district') }}</b>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div> 
+
+                                        <div class="col-lg-12 p-2">
+                                            <div class="{{ $errors->has('ship_address') ? ' has-error' : '' }}">
+                                                <label for="ship_address">Address *</label>
+                                                <textarea id="add1" name="ship_address" placeholder="Address" class="form-control">{{ old('ship_address') }}</textarea>
+                                                @if ($errors->has('ship_address'))
+                                                    <span class="invalid-feedback"> 
+                                                        <b>{{ $errors->first('ship_address') }}</b>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
                                     </div>
+
+                                    {{-- <div class="clearfix"></div><br> --}}
+                                    
 
                                 </div><!-- /.fields-content -->
                             </div><!-- /.billing-fields -->
@@ -98,7 +134,7 @@
                         <div class="cart-totals style2">
                             <h3>Your Order</h3>
 
-                            <table class="product">
+                            <table class="table table-bordered product">
                                 <thead>
                                     <tr>
                                         <th>Product</th>
@@ -116,14 +152,7 @@
                                         <input type="hidden" name="product[{{ $key }}][id]"
                                             value="{{ $product->id }}">
                                         <tr>
-                                            <td>
-                                                {{ $product->name }}
-                                                @if($product->options->v_titles)
-                                                    @foreach ($product->options->v_titles as $title)
-                                                        - {{ $title  }}
-                                                    @endforeach
-                                                @endif
-                                            </td>
+                                            <td>{{ $product->name }}</td>
                                             <td>{{ $product->price }} ৳ x {{ $product->qty }}</td>
                                             <td>{{ $product->price * $product->qty }} ৳</td>
                                         </tr>
@@ -134,7 +163,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Sub Total</td>
-                                        <td class="subtotal">{{ $subtotal }}</td>
+                                        <td class="subtotal" id="subtotal" data-subtotal="{{ $subtotal }}">{{ number_format($subtotal) }} ৳</td>
                                     </tr>
 
                                     <tr>
@@ -152,14 +181,13 @@
                                             </div>
                                             <div class="radio-info">
                                                 <input type="radio" id="inside_dhaka" name="shipping_method"
-                                                    value="inside_dhaka"
-                                                    onclick="setFlat({{ $home_delivery_value }});" checked>
+                                                    value="inside_dhaka" onclick="setFlat({{ $home_delivery_value }});"
+                                                    checked>
                                                 <label for="inside_dhaka"><span>Inside Dhaka</span></label>
                                             </div>
                                             <div class="radio-info">
                                                 <input type="radio" id="outside_dhaka" name="shipping_method"
-                                                    value="outside_dhaka"
-                                                    onclick="setFlat({{ $outside_dhaka_value }});">
+                                                    value="outside_dhaka" onclick="setFlat({{ $outside_dhaka_value }});">
                                                 <label for="outside_dhaka"><span>Outside Dhaka</span></label>
                                             </div>
                                             {{-- <div class="btn-shipping">
@@ -173,7 +201,12 @@
                                             $total = $subtotal + $home_delivery_value;
                                         @endphp
                                         <td>Total</td>
-                                        <td class="price-total">{{ $total }}</td>
+                                        {{-- <td class="price-total">
+                                            {{ number_format($total) }} ৳
+                                        </td> --}}
+                                        <td class="price-total">
+                                            <span id="s-price-total">{{ number_format($total) }}</span> ৳
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -185,14 +218,19 @@
                                     <input type="radio" id="cash-delivery" name="payoption" value="cash" checked>
                                     <label for="cash-delivery">Cash on Delivery</label>
                                 </div>
-                                <div class="radio-info">
+                                {{-- <div class="radio-info">
                                     <input type="radio" id="paypal" name="payoption" value="paypal">
                                     <label for="paypal">bKash</label>
-                                </div>
+                                </div> --}}
                             </div><!-- /.btn-radio style2 -->
-                            <div class="checkbox">
-                                <input type="checkbox" id="checked-order" name="checked-order" checked>
-                                <label for="checked-order">I’ve read and accept the terms & conditions *</label>
+                            <div class="checkbox {{ $errors->has('check-terms') ? ' has-error' : '' }}">
+                                <input type="checkbox" id="check-terms" name="check-terms">
+                                <label for="check-terms">I’ve read and accept the terms & conditions</label> <br>
+                                @if ($errors->has('check-terms'))
+                                    <span class="invalid-feedback"> 
+                                        <b>{{ $errors->first('check-terms') }}</b>
+                                    </span>
+                                @endif
                             </div><!-- /.checkbox -->
                             <div class="btn-order">
                                 <button type="submit" class="order btn btn-success" title="">Place Order</button>
@@ -267,16 +305,68 @@
 
 @push('js_plugin')
     <script>
-        function setFlat(value) {
-            // $("#flatrate").text(value);
+        // function setFlat(value) {
+        //     // $("#flatrate").text(value);
 
-            var subTotal = document.querySelectorAll('.subtotal')[0].innerText
-            // console.log(subTotal);
+        //     var subTotal = document.querySelectorAll('.subtotal')[0].innerText
+        //     // console.log(subTotal);
+        //     var grandTotal = Number(subTotal) + Number(value)
+        //     // console.log(grandTotal);
+        //     var element = document.querySelectorAll('.price-total')[0]
+        //     element.innerText = grandTotal;
+        // }
+        function setFlat(value) {
+        // $("#flatrate").text(value);
+
+            var subTotal = document.getElementById("subtotal").dataset.subtotal;  
             var grandTotal = Number(subTotal) + Number(value)
-            // console.log(grandTotal);
-            var element = document.querySelectorAll('.price-total')[0]
-            element.innerText = grandTotal;
+            var element = document.querySelector('#s-price-total')
+            var setGrandTotal = new Intl.NumberFormat().format(grandTotal)
+            element.innerText = setGrandTotal;
+        
 
         }
+
+        async function set_divisions(){
+            await fetch('/jsons/divisions.json')
+                .then(r => r.json())
+                .then(data => {
+                    let options = data.map(e=>{
+                        let html;
+                        if(e.id == '6'){
+                            html = `<option selected value="${e.id}_${e.name}">${e.bn_name}</option>`
+                        }else{
+                            html = `<option value="${e.id}_${e.name}">${e.bn_name}</option>`
+                        }
+                        return html;
+                    }).join('');
+                    division.innerHTML = options;
+                });
+                await set_district('6');
+        }
+
+        async function set_district(division_id = '6') {
+            division_id = division_id.split('_')[0];
+            await fetch('/jsons/districts.json')
+                .then(r => r.json())
+                .then(data => {
+                    let options = data.map(e=>{
+                        let html;
+                        if(e.division_id == division_id){
+                            if(e.id == '47'){
+                                html = `<option selected value="${e.name}">${e.bn_name}</option>`
+                            }else{
+                                html = `<option value="${e.name}">${e.bn_name}</option>`
+                            }
+                        }
+                        return html;
+                    }).join('');
+                    district.innerHTML = options;
+    
+                });
+        }
+
+        set_divisions();
+        
     </script>
 @endpush

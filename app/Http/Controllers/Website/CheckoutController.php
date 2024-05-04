@@ -39,6 +39,10 @@ class CheckoutController extends Controller
             }
         }
 
+        if(!count($cartItems)) {
+            return back()->with('warning', 'First add some products in your cart!');
+        }
+
         // dd($cartItems);
         // dd($cartItems[0]->rowId);
         // dd($cartItems[0]->id);
@@ -58,7 +62,14 @@ class CheckoutController extends Controller
             'ship_email' => ['email'],
             'ship_phone' => ['required', 'string'],
             'ship_address' => ['required'],
+            'division' => ['required'],
+            'district' => ['required'],
+            'check-terms' => ['required'],
             'shipping_method' => ['required'],
+        ],[
+            'ship_name.required' => "Name field is required",
+            'ship_email.required' => "Email field is required",
+            'check-terms.required' => "This has to be checked"
         ]);
 
         // dd($request->all());
@@ -118,6 +129,8 @@ class CheckoutController extends Controller
         $order_info->last_name = $request->last_name ?: NULL;
         $order_info->email = $request->ship_email;
         $order_info->mobile_number = $request->ship_phone;
+        $order_info->division = $request->division;
+        $order_info->district = $request->district;
         $order_info->address = $request->ship_address;
         $order_info->save();
 

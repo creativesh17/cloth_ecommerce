@@ -96,7 +96,6 @@
 
 
             <div class="col-md-4">
-
                 <div class="box-cart" id="cartItems">
                     <div class="inner-box">
                         <ul class="menu-compare-wishlist">
@@ -122,7 +121,7 @@
                                 <span >{{ Cart::content()->count() }}</span>
                             </div>
                             <div class="price">
-                                {{ Cart::total() }} ৳
+                                {{ number_format(Cart::total()) }} ৳
                             </div>
                         </a>
                         <?php
@@ -140,29 +139,29 @@
                         ?>
 
                         <div class="dropdown-box header-dropdown">
-                            @foreach ($cartItems as $key => $item)
-                                <ul >
-                                    <li>
-                                        <div class="img-product">
-                                            <img src="{{ $item->options->image }}" alt="">
+                            <ul class="ul-cart-list">
+                                @foreach ($cartItems as $key => $item)
+                                <li>
+                                    <div class="img-product">
+                                        <img src="{{ $item->options->image }}" alt="">
+                                    </div>
+                                    <div class="info-product">
+                                        <div class="name">
+                                            {{ $item->name }}
                                         </div>
-                                        <div class="info-product">
-                                            <div class="name">
-                                                {{ $item->name }}
-                                            </div>
-                                            <div class="price">
-                                                <span>{{ $item->qty }} x</span>
-                                                <span>{{ $item->price }}</span>
-                                            </div>
+                                        <div class="price">
+                                            <span>{{ $item->qty }} x</span>
+                                            <span>{{ number_format($item->price) }} ৳</span>
                                         </div>
-                                        <div class="clearfix"></div>
-                                        {{-- <span class="delete">x</span> --}}
-                                    </li>
-                                </ul>
-                            @endforeach
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    {{-- <span class="delete">x</span> --}}
+                                </li>
+                                @endforeach
+                            </ul>
                             <div class="total">
                                 <span>Subtotal:</span>
-                                <span class="price">{{ Cart::total() }}</span>
+                                <span class="price">{{ number_format(Cart::total()) }} ৳</span>
                             </div>
 
                             <div class="btn-cart">

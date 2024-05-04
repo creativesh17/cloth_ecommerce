@@ -91,11 +91,16 @@
         <div class="modal fade" id="cart_modal" tabindex="-1" role="dialog" aria-labelledby="cart_modal_abel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
-                <div class="modal-body">
-                    <form action="" class="modal_add_cart_form" onsubmit="modal_cart_form_submit();" method="POST">
-                        @csrf
-                        <div id="cart_modal_content"></div>
-                    </form>
+                <div class="modal-content">                    
+                      <button type="button" class="close text-right mr-4" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>                    
+                    <div class="modal-body">
+                        <form action="" class="modal_add_cart_form" onsubmit="modal_cart_form_submit();" method="POST">
+                            @csrf
+                            <div id="cart_modal_content"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,6 +152,17 @@
                 icon: "error",
                 title: "Oops...",
                 text: "{{ session('error') }}",
+                timer: 3000
+            });
+        </script>
+    @endif
+    @if (Session::has('warning'))
+        <script>
+            Swal.fire({
+                position: "top-end",
+                icon: "warning",
+                title: "Oops...",
+                text: "{{ session('warning') }}",
                 timer: 3000
             });
         </script>

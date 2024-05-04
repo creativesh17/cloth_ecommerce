@@ -64,10 +64,10 @@
                                         <thead>
                                             <tr>
                                                 <th class="center">#</th>
-                                                <th>Item</th>
-                                                <th class="right">Unit Price</th>
-                                                <th class="center">Qty</th>
-                                                <th class="right" style="text-align: right;">Total</th>
+                                                <th><strong>Item</strong></th>
+                                                <th class="right no-wrap"><strong>Unit Price</strong></th>
+                                                <th class="center no-wrap"><strong>Qty</strong></th>
+                                                <th class="right no-wrap" style="text-align: right;"><strong>Total</strong></th>
                                             </tr>
                                         </thead>
                                         {{-- @dd($order->sub_total) --}}
@@ -75,35 +75,10 @@
                                             @foreach ($order_details as $key=>$dorder)
                                             <tr>
                                                 <td class="center">{{ $key+1 }}</td>
-                                                <td class="left strong">
-                                                    {{ $dorder->product->product_name }}
-                                                    <div>
-                                                        {{-- @dump($dorder->variant_names) --}}
-                                                        @php
-                                                            try {
-                                                        @endphp
-
-                                                        @if ($dorder->variant_names)
-                                                            @php
-                                                                $v_names = json_decode($dorder->variant_names);
-                                                                $v_titles = json_decode($dorder->variant_title);
-                                                            @endphp
-                                                            @foreach ($v_names as $key=>$title)
-                                                                <b>{{ $title }}</b>: {{ $v_titles[$key] }},
-                                                            @endforeach
-                                                        @endif
-                                                        
-                                                        @php
-                                                            } catch (\Throwable $th) {
-                                                                //throw $th;
-                                                            }    
-                                                        @endphp
-                                                        
-                                                    </div>
-                                                </td>
-                                                <td class="right">{{ $dorder->product_price }} tk</td>
-                                                <td class="center">{{ $dorder->qty }}</td>
-                                                <td class="right" style="text-align: right;">{{ $dorder->product_price * $dorder->qty }} tk</td>
+                                                <td class="left strong">{{ $dorder->product->product_name }}</td>
+                                                <td class="right no-wrap">{{ number_format($dorder->product_price) }} ৳</td>
+                                                <td class="center no-wrap">{{ $dorder->qty }}</td>
+                                                <td class="right no-wrap" style="text-align: right;">{{ number_format($dorder->product_price * $dorder->qty) }} ৳</td>
                                                 {{-- @php
                                                     $subtotal += $order->product_price * $order->qty
                                                 @endphp --}}
@@ -123,33 +98,33 @@
                                                         <strong class="text-dark">Subtotal</strong>
                                                     </td>
                                                     
-                                                    <td class="right" style="text-align: right;"> {{ $order->sub_total }}  tk</td>
-                                                    {{-- <td class="right" style="text-align: right;">{{ 555 }} tk</td> --}}
+                                                    <td class="right" style="text-align: right;"> {{ number_format($order->sub_total) }}  ৳</td>
+                                                    {{-- <td class="right" style="text-align: right;">{{ 555 }} ৳</td> --}}
                                                 </tr>
                                                 <tr>
                                                     <td class="left">
                                                         <strong class="text-dark">Delivery Charge</strong>
                                                     </td>
-                                                    <td class="right" style="text-align: right;">{{ $order->total_price  - $order->sub_total }} tk</td>
+                                                    <td class="right" style="text-align: right;">{{ number_format($order->total_price  - $order->sub_total) }} ৳</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="left">
                                                         <strong class="text-dark">Total</strong>
                                                     </td>
                                                     <td class="right" style="text-align: right;">
-                                                        <strong class="text-dark">{{ $order->total_price }} tk</strong>
+                                                        <strong class="text-dark">{{ number_format($order->total_price) }} ৳</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="left">
                                                         <strong class="text-dark">Paid</strong>
                                                     </td>
-                                                    <td class="right" style="text-align: right;">
+                                                    <td class="right no-wrap" style="text-align: right;">
                                                         <strong class="text-dark">
                                                             @if($order->order_payments_sum_amount == 0)
-                                                                {{ 0 }} tk
+                                                                {{ 0 }} ৳
                                                             @else
-                                                                {{ $order->order_payments_sum_amount }} tk
+                                                                {{ number_format($order->order_payments_sum_amount) }} ৳
                                                             @endif
                                                         </strong>
                                                     </td>
@@ -158,9 +133,9 @@
                                                     <td class="left">
                                                         <strong class="text-dark">Due</strong>
                                                     </td>
-                                                    <td class="right" style="text-align: right;">
+                                                    <td class="right no-wrap" style="text-align: right;">
                                                         <strong class="text-dark">
-                                                            {{ $order->total_price - $order->order_payments_sum_amount }} tk
+                                                            {{ number_format($order->total_price - $order->order_payments_sum_amount) }} ৳
                                                         </strong>
                                                     </td>
                                                 </tr>
