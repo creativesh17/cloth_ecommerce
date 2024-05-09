@@ -7,6 +7,7 @@ use App\Mail\InvoiceMail;
 use App\Models\AccountLog;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderAddress;
 use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\User;
@@ -67,7 +68,7 @@ class OrderController extends Controller
     }
 
 
-    
+
     public function store(Request $request)
     {
         $validator = Validator::make(request()->all(), [
@@ -320,21 +321,21 @@ class OrderController extends Controller
         return response()->json($data, 200);
     }
 
-    public function order_profit_by_date($startDate, $endDate) {
+    public function order_profit_by_date($startDate, $endDate)
+    {
 
         $orderProducts = OrderDetails::where('created_at', '>=', $startDate)
-                                    ->where('created_at', '<=', $endDate)
-                                    ->with('product_selected_column')
-                                    ->get();
+            ->where('created_at', '<=', $endDate)
+            ->with('product_selected_column')
+            ->get();
 
         $profit_loss_price = 0;
-        foreach($orderProducts as $orderProduct) {
-            if($orderProduct->product_price > 0) {
+        foreach ($orderProducts as $orderProduct) {
+            if ($orderProduct->product_price > 0) {
                 $profit_loss_price += ($orderProduct->product_price - $orderProduct->product_selected_column->purchase_price) * $orderProduct->qty;
             }
         }
         return $profit_loss_price;
-        
     }
 
     public function report_info_by_date()
@@ -437,5 +438,42 @@ class OrderController extends Controller
         }
 
         return response()->json('success', 200);
+    }
+
+
+    public function order_manage() {
+        $order_id = request()->id;
+        $order_items = json_decode(request()->order_items);
+
+        $order_address = OrderAddress::where('order_id',  $order_id)->first();
+        $order = Order::find($order_id);
+
+        if ($order_address) {
+            $order_address->fill(request()->except([
+                "id",
+                "product_ids",
+                "other_charge",
+                "discount", "coupon", "order_items"
+            ]))->save();
+        } else {
+            return response()->json('Data Not Found', 400);
+        }
+
+        OrderDetails::where('order_id', $order_id)->delete();
+        // whereIn()
+
+        foreach ($order_items as $item) {
+            OrderDetails::create([
+                'order_id' => $order_id,
+                'user_id' => $order->user_id,
+                'product_id' => $item->id,
+                'discount_price' => $item->discount_price,
+                'product_price' => $item->sales_price,
+                'qty' => $item->qty,
+                'created_at' => Carbon::now()->toDateTimeString(),
+            ]);
+        }
+
+        return response()->json('Order Updated', 200);
     }
 }

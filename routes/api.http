@@ -1,3 +1,4 @@
+
 POST  http://127.0.0.1:8000/api/v1/user/api-login HTTP/1.1
 content-type: application/json
 
@@ -8,6 +9,16 @@ content-type: application/json
 
 ###
 GET  http://127.0.0.1:8000/api/v1/user/auth-check HTTP/1.1
+content-type: application/json
+
+{
+    "email": "myphoto288@gmail.com",
+    "password": "12345678"
+}
+
+
+###
+GET  http://127.0.0.1:8000/api/v1/account_category HTTP/1.1
 content-type: application/json
 
 {

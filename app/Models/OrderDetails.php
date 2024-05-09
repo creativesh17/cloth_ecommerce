@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetails extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     /**
      * Get the user associated with the OrderDetails

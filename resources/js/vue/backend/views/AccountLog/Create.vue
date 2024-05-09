@@ -44,6 +44,7 @@
                                         :name="`amount`"
                                     />
                                 </div>
+
                                 <div
                                     class="form-group d-grid align-content-start gap-1 mb-2"
                                 >
@@ -62,8 +63,7 @@
                                         <option value="expense">Expense</option>
                                     </select>
                                 </div>
-
-                                
+                            
 
                                 <div class="form-group d-grid align-content-start gap-1 mb-2">
                                     <input-field

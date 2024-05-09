@@ -18,6 +18,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -53,4 +54,9 @@ class User extends Authenticatable
     public function orders() {
         return $this->hasMany(Order::class, 'user_id');
     }
+
+    public function order_addresses() {
+        return $this->hasMany(OrderAddress::class, 'user_id');
+    }
+    
 }

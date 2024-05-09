@@ -205,3 +205,23 @@ https://www.lerevecraze.com/product-category/men/panjabi/
 18. proceed to checkout page - charge fix koresi
     order address - division and district - database and controller with requirement
     super modify design
+
+
+///////////////////////////////////////////////
+
+js - all copy
+
+orderController all copy
+setting Controller all copy
+checkout Controller all copy
+api.php - route all copy
+
+User Model - All copy alsoworks
+    public function order_addresses() {
+        return $this->hasMany(OrderAddress::class, 'user_id');
+    }
+OrderDetails Model - All copy alsoworks
+    protected $guarded = [];
+
+api.http
+m.http

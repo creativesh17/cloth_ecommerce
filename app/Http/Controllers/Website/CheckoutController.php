@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Validator;
 class CheckoutController extends Controller
 {
     public function checkout() {
+
+        // return count(auth()->user()->order_addresses);
+        // if(count(auth()->user()->order_addresses)) {
+        //     return ;
+        // }else {
+        //     return 5;
+        // }
+        // return auth()->user()->order_addresses[auth()->user()->order_addresses->count() - 1];
+        
         $setting = Setting::select('home_delivery_cost', 'outside_dhaka_cost')->first();
         // $cart_handler = new CartController();
         // $carts = $cart_handler->get();
@@ -37,10 +46,10 @@ class CheckoutController extends Controller
                     $cartItems[] = $v;
                 }
             }
-        }
+        }   
 
         if(!count($cartItems)) {
-            return back()->with('warning', 'First add some products in your cart!');
+            return back()->with('warning', 'To go to checkout page, add some products in your cart!');
         }
 
         // dd($cartItems);
@@ -93,7 +102,9 @@ class CheckoutController extends Controller
         $order = new Order();
         $order->order_status = 'Pending';
         if (Auth::user()) {
-            $order->user_id = Auth::user()->id ?: '130';
+            $order->user_id = Auth::user()->id;
+        } else {
+            $order->user_id = '130';
         }
         $order->total_price = $cart_total + $shipping_charge;
         $order->sub_total = $cart_total;
@@ -102,6 +113,7 @@ class CheckoutController extends Controller
         // $order->coupon_discount = $request->coupon_discount;
         $order->payment_status = 'Pending';
         $order->delivery_method = $request->shipping_method;
+        $order->delivery_charge = $shipping_charge;
         $order->save();
 
         $date = Carbon::now()->format('ym');
@@ -121,8 +133,11 @@ class CheckoutController extends Controller
 
         $order_info = new OrderAddress();
         $order_info->order_id = $order->id;
+        
         if (Auth::user()) {
             $order_info->user_id = Auth::user()->id;
+        } else {
+            $order_info->user_id = '130';
         }
 
         $order_info->first_name = $request->ship_name;
@@ -161,17 +176,12 @@ class CheckoutController extends Controller
             $product = (object) $product;
             $order_details = new OrderDetails();
             $order_details->order_id = $order->id;
-
             if (Auth::user()) {
                 $order_details->user_id = Auth::user()->id;
             }
             // dd($product);
             $order_details->product_id = $product->id;
             $order_details->product_price = $product->price;
-
-            $order_details->variant_id = json_encode($product->options->v_ids);
-            $order_details->variant_title = json_encode($product->options->v_titles);
-            $order_details->variant_names = json_encode($product->options->v_names);
 
             $order_details->qty = $product->qty;
             $order_details->save();

@@ -282,7 +282,9 @@ Route::group(
                 Route::post('/status_update','Admin\Order\OrderController@status_update');
                 Route::post('/send_emails','Admin\Order\OrderController@send_email');
                 Route::post('/dashboard_info','Admin\Order\OrderController@dashboard_info');
+                Route::post('/manage', 'Admin\Order\OrderController@order_manage');             
                 Route::get('/{id}','Admin\Order\OrderController@show');
+
             });
 
             Route::group(['prefix' => 'customer'], function () {
@@ -323,6 +325,7 @@ Route::group(
             Route::group(['prefix' => 'settings'], function () {
                 Route::get('/get','Admin\SettingController@get');
                 Route::post('/update','Admin\SettingController@update');
+                Route::get('/company/details','Admin\SettingController@company_details');
             });
 
         });

@@ -31,4 +31,12 @@ class SettingController extends Controller
 
         return response()->json($setting);
     }
+
+
+    public function company_details() {
+        $setting = Setting::first();
+        return response()->json($setting);
+    }
+
+
 }

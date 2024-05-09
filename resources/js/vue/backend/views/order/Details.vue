@@ -36,19 +36,17 @@
                         <div class="row mb-4">
                             <div class="col-sm-6">
                                 <h5 class="mb-3">From:</h5>
-                                <h3 class="text-dark mb-1">{{ get_company_info.company_name }}</h3>
-                                <div>{{ get_company_info.address[0].building }}, </div>
-                                <div>{{ get_company_info.address[0].shop }}, </div>
-                                <div>{{ get_company_info.address[0].area }}, {{ get_company_info.address[0].division }}</div>
-                                <div>Email: {{ get_company_info.email }}</div>
-                                <div>Phone: {{ get_company_info.mobile_no[0] }}</div>
+                                <h4 class="text-dark mb-1">{{ companyInfo.shop_name }}</h4>
+                                <div>{{ companyInfo.address }}, </div>
+                                <div class="no-wrap"><b>Email:</b> {{ companyInfo.email_1 }}</div>
+                                <div class="no-wrap"><b>Phone:</b> {{ companyInfo.phone_number_1 }}</div>
                             </div>
                             <div class="col-sm-6 text-right" v-if="this[`get_${store_prefix}`]">
                                 <h5 class="mb-3">To:</h5>
-                                <h3 class="text-dark mb-1">{{ this[`get_${store_prefix}`].order_address.first_name }} {{ this[`get_${store_prefix}`].order_address.last_name }}</h3>
+                                <h4 class="text-dark mb-1">{{ this[`get_${store_prefix}`].order_address.first_name }} {{ this[`get_${store_prefix}`].order_address.last_name }}</h4>
                                 <div>{{ this[`get_${store_prefix}`].order_address.address }}</div>
-                                <div>Email: {{ this[`get_${store_prefix}`].order_address.email }}</div>
-                                <div>Phone: {{ this[`get_${store_prefix}`].order_address.mobile_number }}</div>
+                                <div class="no-wrap">{{ this[`get_${store_prefix}`].order_address.email }}</div>
+                                <div class="no-wrap">{{ this[`get_${store_prefix}`].order_address.mobile_number }}</div>
                             </div>
                         </div>
                         <div class="table-responsive-sm" v-if="this[`get_${store_prefix}`]">
@@ -120,11 +118,16 @@
                                     <label for="order_status_change" class="form-label">Change Status</label>
 
                                     <select id="order_status_change" v-model="this[`get_${store_prefix}`].order_status" class="form-select" name="order_status">
-                                        <option value="pending">Pending</option>
-                                        <option value="accepted">Accepted</option>
-                                        <option value="processing">Processing</option>
-                                        <option value="delivered">Delivered</option>
-                                        <option value="canceled">Canceled</option>
+                                        <option value="Pending" 
+                                        :selected="this[`get_${store_prefix}`].order_status == 'Pending'?'selected':''">Pending</option>
+                                        <option value="accepted" 
+                                        :selected="this[`get_${store_prefix}`].order_status == 'accepted'?'selected':''">Accepted</option>
+                                        <option value="processing" 
+                                        :selected="this[`get_${store_prefix}`].order_status == 'processing'?'selected':''">Processing</option>
+                                        <option value="delivered" 
+                                        :selected="this[`get_${store_prefix}`].order_status == 'delivered'?'selected':''">Delivered</option>
+                                        <option value="canceled" 
+                                        :selected="this[`get_${store_prefix}`].order_status == 'canceled'?'selected':''">Canceled</option>
                                     </select>
                                 </div>
                                 <button class="btn btn-primary">Update</button>
@@ -153,10 +156,12 @@ export default {
             /** store prefix for JSX */
             store_prefix,
             route_prefix,
+            companyInfo: [],
         }
     },
     created: function () {
-        this[`fetch_${store_prefix}`]({id: this.$route.params.id, select_all:1})
+        this[`fetch_${store_prefix}`]({id: this.$route.params.id, select_all:1});
+        this.getInfo();
 
         // setTimeout(() => {
         //     document.querySelector("section").style.background = "transparent"
@@ -173,6 +178,16 @@ export default {
             `print_${store_prefix}_details`,
             `email_${store_prefix}_invoice`
         ]),
+        getInfo() {
+            axios.get('/settings/company/details')
+                .then(response => {
+                    this.companyInfo = response.data;
+                    console.log(response.data);
+                })
+                .catch(error => {
+
+                })
+        },
         ...mapMutations([
             `set_${store_prefix}`
         ]),

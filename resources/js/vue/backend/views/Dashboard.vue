@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">
-                                            {{ get_dashboard_stat.total_sales }}
+                                            {{ get_dashboard_stat?.total_sales }}
                                         </h5>
                                         <small>Sales</small>
                                     </div>
@@ -58,7 +58,7 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                get_dashboard_stat.total_product
+                                                get_dashboard_stat?.total_product
                                             }}
                                         </h5>
                                         <small>Products</small>
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex d-none align-items-center">
                                     <div
                                         class="badge rounded-pill bg-label-success me-3 p-2"
                                     >
@@ -89,7 +89,7 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                get_dashboard_stat.total_pending_order
+                                                get_dashboard_stat?.total_pending_order
                                             }}
                                         </h5>
                                         <small>Pending Orders</small>
@@ -106,7 +106,7 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                get_dashboard_stat.total_categories
+                                                get_dashboard_stat?.total_categories
                                             }}
                                         </h5>
                                         <small>Total Categories</small>
@@ -123,7 +123,7 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                get_dashboard_stat.total_sales_this_month
+                                                get_dashboard_stat?.total_sales_this_month
                                             }}
                                         </h5>
                                         <small
@@ -142,7 +142,7 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                get_dashboard_stat.total_sales_today
+                                                get_dashboard_stat?.total_sales_today
                                             }}
                                         </h5>
                                         <small>Total sales for today</small>
@@ -228,9 +228,7 @@
                                     </div>
                                     <div class="card-info">
                                         <h5 class="mb-0">
-                                            {{
-                                                accounts_statistics.data.total_income
-                                            }}
+                                            {{ accounts_statistics.data?.total_income}}
                                         </h5>
                                         <small>Total Income</small>
                                     </div>
@@ -247,7 +245,7 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                accounts_statistics.data.total_expense
+                                                accounts_statistics.data?.total_expense
                                             }}
                                         </h5>
                                         <small>Total Expense</small>
@@ -265,7 +263,8 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                accounts_statistics.data.income_from_order
+                                                accounts_statistics.data
+                                                    .income_from_order
                                             }}
                                         </h5>
                                         <small>Income from Order</small>
@@ -283,7 +282,8 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                accounts_statistics.data.net_profit
+                                                accounts_statistics.data
+                                                    .net_profit
                                             }}
                                         </h5>
                                         <small>Net Profit</small>
@@ -301,10 +301,19 @@
                                     <div class="card-info">
                                         <h5 class="mb-0">
                                             {{
-                                                accounts_statistics.data.profit_loss_from_order
+                                                accounts_statistics.data
+                                                    .profit_loss_from_order
                                             }}
                                         </h5>
-                                        <small :class="accounts_statistics.data.profit_loss_from_order < 0? 'text-warning': 'text-success'">Profit or Loss Only from Order</small>
+                                        <small
+                                            :class="
+                                                accounts_statistics.data
+                                                    .profit_loss_from_order < 0
+                                                    ? 'text-warning'
+                                                    : 'text-success'
+                                            "
+                                            >Profit or Loss Only from Order</small
+                                        >
                                     </div>
                                 </div>
                             </div>
@@ -474,7 +483,13 @@ export default {
         ...mapActions(["fetch_dashboard_stats"]),
 
         getAccountStatement: async function () {
-            this.accounts_statistics = await axios.post("/dashboard/account-reports",{start_date: this.start_date,end_date: this.end_date,});
+            this.accounts_statistics = await axios.post(
+                "/dashboard/account-reports",
+                {
+                    start_date: this.start_date,
+                    end_date: this.end_date,
+                }
+            );
         },
     },
 
