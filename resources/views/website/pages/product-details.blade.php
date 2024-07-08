@@ -484,8 +484,9 @@
                     {{-- <h4 class="text-center"><a href="{{ url('/login') }}">Please login first for review</a></h4> --}}
                     {{-- @else --}}
                     <div class="title">
-                        <strong>Add a review</strong> or <strong>Sign in first to add a review</strong>
+                        <h2><strong>Add a review</strong> or <strong>Sign in first to add a review</strong></h2>
                     </div>
+                    @if (auth()->check())
                     <form action="{{ route('review.new') }}" method="POST" id="better-rating-form">
                         @csrf
                         <input type="hidden" name="id" value="{{ $product->id }}">
@@ -501,6 +502,8 @@
                         <textarea class="form-control" name="review_description" id="" cols="30" rows="10" required></textarea>
                         <button class="btn btn-info" type="submit">Add Review</button>
                     </form>
+                    @endif
+                   
                     {{-- @endguest --}}
 
                 </div><!-- /.form-review -->

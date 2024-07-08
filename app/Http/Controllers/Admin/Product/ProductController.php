@@ -120,7 +120,7 @@ class ProductController extends Controller
             'brand_id' => ['required'],
             'selected_categories' => ['required'],
             'specification' => ['required'],
-            'description' => ['required'],
+            // 'description' => ['required'],
             'search_keywords' => ['required'],
             'page_title' => ['required'],
             'image1' => ['required'],
@@ -487,7 +487,7 @@ class ProductController extends Controller
             ]);
 
         if(request()->discount_percent > 0){
-            $discount = DiscountProduct::create(request()->all());
+            $discount = DiscountProduct::create(request()->except('product_ids'));
             return $discount;
         }
         return 'removed';

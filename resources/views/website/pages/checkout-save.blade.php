@@ -145,11 +145,11 @@
                                                 {{-- <span>Flat Rate: <span id="flatrate">{{ $shippingCharge }}</span>
                                                     Taka</span> --}}
                                             </div>
-                                            <div class="radio-info">
+                                            {{-- <div class="radio-info">
                                                 <input type="radio" id="store_pickup" name="shipping_method"
                                                     value="store_pickup" onclick="setFlat({{ $storePickup }});">
                                                 <label for="store_pickup"><span>Store Pickup</span></label>
-                                            </div>
+                                            </div> --}}
                                             <div class="radio-info">
                                                 <input type="radio" id="inside_dhaka" name="shipping_method"
                                                     value="inside_dhaka"

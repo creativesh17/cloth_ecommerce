@@ -4,7 +4,8 @@
             <div class="cart_product_view">
                 <div>
                     @if ($product->related_image->first())
-                        <img src="{{ asset($product->related_image->first()->image) }}" alt='' width='400' height='300' />
+                        <img src="{{ asset($product->related_image->first()->image) }}" alt='' width='400'
+                            height='300' />
                     @endif
                 </div>
                 <div>
@@ -60,7 +61,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-            
+
                                     <tr>
                                         <td>Warranty</td>
                                         <td>
@@ -78,7 +79,7 @@
                                 </tbody>
                             </table>
                         </div>
-            
+
                         <div class="price">
                             @if ($product->discount && $product->discount['discount_last_date'] > Carbon\Carbon::now())
                                 {{-- @if ($product->active_price) --}}
@@ -95,7 +96,7 @@
                             @endif
                         </div>
                     </div>
-            
+
                     <div class="product_cart_box variants">
                         @foreach ($varaintValues as $key => $variants)
                             <div class="colors">
@@ -113,16 +114,24 @@
                     <div class="product_cart_box">
                         <div class="">
                             <span class=""></span>
-                            <input type="number" class="cartQuantity" name="qty" value="1" min="1" max="100"
-                                placeholder="Quanlity">
+                            <input type="number" class="cartQuantity" name="qty" value="1" min="1"
+                                max="100" placeholder="Quanlity">
                             <span class=""></span>
                         </div>
                         <div>
                             @if ($product->is_in_stock > 0 && $product->stock != 0)
-                                <div class="btn-add-cart">
-                                    <button type="submit" class="add_to_cart">
+                                <div class="btn-add-cart me-3 mr-3">
+                                    <button type="button" onclick="modal_cart_form_submit()" class="add_to_cart">
                                         <img src="{{ asset('frontend') }}/images/icons/add-cart.png" alt="">
                                         Add to Cart
+                                    </button>
+                                </div>
+                            @endif
+                            @if ($product->is_in_stock > 0 && $product->stock != 0)
+                                <div class="btn-add-cart">
+                                    <button type="button" onclick="modal_cart_form_submit(`add_to_cart_and_order`)" class="add_to_cart_and_order">
+                                        <img src="{{ asset('frontend') }}/images/icons/add-cart.png" alt="">
+                                        Order Now
                                     </button>
                                 </div>
                             @endif
@@ -130,7 +139,7 @@
                     </div><!-- /.quanlity-box -->
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

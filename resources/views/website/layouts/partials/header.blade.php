@@ -213,7 +213,7 @@
                         
                     </div><!-- /.mainnav -->
                 </div><!-- /.nav-wrap -->
-                <div class="today-deal d-flex gap-2" style="">
+                <div class="today-deal d-flex" style="gap: 10px;">
                     <div>
                         <a href="{{ route('about_us') }}" title="">About Us</a>                    
                     </div>

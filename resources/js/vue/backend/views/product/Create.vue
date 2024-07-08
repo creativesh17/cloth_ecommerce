@@ -93,23 +93,23 @@
                                 <div class="form-group full_width d-grid align-content-start gap-1 mb-2 " >
                                     <br>
                                     <label for="call_for_price">
-                                        <input type="checkbox" value="1" class="form-check-input" id="call_for_price">
+                                        <input type="checkbox" name="call_for_price" value="1" class="form-check-input" id="call_for_price">
                                         &nbsp; &nbsp; Call for price
                                     </label>
                                     <label for="is_upcomming">
-                                        <input type="checkbox" value="1" class="form-check-input" id="is_upcomming">
+                                        <input type="checkbox" name="is_upcomming" value="1" class="form-check-input" id="is_upcomming">
                                         &nbsp; &nbsp; Upcomming
                                     </label>
                                     <label for="is_tba">
-                                        <input type="checkbox" value="1" class="form-check-input" id="is_tba">
+                                        <input type="checkbox" name="is_tba" value="1" class="form-check-input" id="is_tba">
                                         &nbsp; &nbsp; TBA
                                     </label>
                                     <label for="is_pre_order">
-                                        <input type="checkbox" value="1" class="form-check-input" id="is_pre_order">
+                                        <input type="checkbox" name="is_pre_order" value="1" class="form-check-input" id="is_pre_order">
                                         &nbsp; &nbsp; Pre order
                                     </label>
                                     <label for="is_in_stock">
-                                        <input checked type="checkbox" value="1" class="form-check-input" id="is_in_stock">
+                                        <input checked type="checkbox" name="is_in_stock" value="1" class="form-check-input" id="is_in_stock">
                                         &nbsp; &nbsp; In stock available
                                     </label>
                                     <br>

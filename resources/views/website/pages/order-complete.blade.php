@@ -51,10 +51,10 @@
                                     <div class="col-sm-6" style="text-align: right;">
                                         <h5 class="mb-3">To:</h5>
                                         <div>
-                                            <h3 class="text-dark mb-1">{{ $order_address[0]->first_name }}</h3>
-                                            <div>Address: {{ $order_address[0]->address }}</div>
+                                            <h3 class="text-dark mb-1">{{ $order_address->first_name }}</h3>
+                                            <div>Address: {{ $order_address->address }}</div>
                                         {{-- <div>Email: {{ $order_details->order_address->email }}</div> --}}
-                                            <div>Phone: {{ $order_address[0]->mobile_number }}</div>
+                                            <div>Phone: {{ $order_address->mobile_number }}</div>
                                         </div>
                                     </div>
                                 </div>

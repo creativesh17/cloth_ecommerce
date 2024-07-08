@@ -96,7 +96,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>                    
                     <div class="modal-body">
-                        <form action="" class="modal_add_cart_form" onsubmit="modal_cart_form_submit();" method="POST">
+                        <form action="" class="modal_add_cart_form" id="modal_add_cart_submit_form" onsubmit="modal_cart_form_submit();" method="POST">
                             @csrf
                             <div id="cart_modal_content"></div>
                         </form>

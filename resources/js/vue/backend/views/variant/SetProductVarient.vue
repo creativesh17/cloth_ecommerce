@@ -30,8 +30,8 @@
                                         <label class="text-bold" for="">{{ varient.title }}</label>
                                     </div>
                                     <div>
-                                        <select class="form-select" :name="`varients[${varient.id}][]`" @change="$event.target.dataset.chosen = $event.target.value; ">
-                                            <option value="">select</option>
+                                        <select class="form-select" multiple :name="`varients[${varient.id}][]`" @change="$event.target.dataset.chosen = $event.target.value; ">
+                                            <!-- <option value="">select</option> -->
                                             <template v-for="value in varient.values">
                                                 <option :selected="varient_ids.includes(value.id)" v-if="value.title" :value="value.id" :key="value.id">
                                                     {{ value.title }}

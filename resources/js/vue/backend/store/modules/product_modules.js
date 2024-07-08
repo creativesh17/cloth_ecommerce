@@ -61,7 +61,10 @@ const actions = {
         category.forEach((i)=> {
             form_data.append('selected_categories[]',i.id);
         });
-        form_data.append('brand_id',brand[0].id);
+        if(brand.length){
+            form_data.append('brand_id',brand[0].id);
+        }
+        //
 
         // console.log(form_data);
         form_data.append("specification", state[`${store_prefix}_specification`]);

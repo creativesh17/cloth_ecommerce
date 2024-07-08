@@ -68,7 +68,7 @@ class CheckoutController extends Controller
 
         $request->validate([
             'ship_name' => ['required', 'string'],
-            'ship_email' => ['email'],
+            // 'ship_email' => ['email'],
             'ship_phone' => ['required', 'string'],
             'ship_address' => ['required'],
             'division' => ['required'],
@@ -206,8 +206,8 @@ class CheckoutController extends Controller
 
     public function order_complete($id) {
         $order = Order::where('invoice_id', $id)->withSum('order_payments', 'amount')->first();
-        $order_details = $order->order_details()->get();
-        $order_address = $order->order_address()->get();
+        $order_details = $order->order_details()->orderBy('id','asc')->get();
+        $order_address = $order->order_address()->orderBy('id','desc')->first();
         // dd($order_address[0]->first_name);
         // dd($order_details);
         // dd($order);
