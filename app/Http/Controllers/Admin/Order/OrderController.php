@@ -31,7 +31,8 @@ class OrderController extends Controller
             $status = request()->status;
         }
 
-        $query = Order::where('status', $status)->orderBy($orderBy, $orderByType);
+        // $query = Order::where('status', $status)->with(['order_address', 'order_details', 'order_payments'])->orderBy('id', 'desc');
+        $query = Order::where('status', $status)->orderBy('id', 'desc');
 
         if (request()->has('search_key')) {
             $key = request()->search_key;
@@ -43,11 +44,15 @@ class OrderController extends Controller
             });
         }
 
-        $query->with([
-            'order_payments' => function ($q) {
-                return $q->select('payment_method', 'id', 'order_id');
-            }
-        ]);
+        // $query->with([
+        //     'order_payments' => function ($p) {
+        //         return $p->select('payment_method', 'id', 'order_id');
+        //     },
+        //     'order_address' => function ($q) {
+        //         return $q;
+        //     },
+
+        // ]);
 
         $data = $query->paginate($paginate);
         return response()->json($data);
@@ -55,9 +60,14 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $data = Order::where('id', $id)->with(['order_address', 'order_payments', 'order_details' => function ($q) {
+        $data = Order::where('id', $id)->with([
+            'order_address'=> function($q) {
+                $q->orderBy('id', 'desc');
+            }, 
+            'order_payments', 'order_details' => function ($q) {
             $q->with('product');
         }])->first();
+
         if (!$data) {
             return response()->json([
                 'err_message' => 'not found',

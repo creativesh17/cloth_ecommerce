@@ -4,10 +4,23 @@
             <div class="card-header">
                 <h4>Edit</h4>
                 <div class="btns">
+                    <a href="" @click.prevent=" call_store(`set_${store_prefix}`, null), $router.push({ name: `DetailsOrder` })" class="btn rounded-pill btn-outline-warning">
+                        <i class="fa fa-arrow-left me-5px"></i>
+                        <span> Details </span>
+                    </a>
                     <a href="" @click.prevent=" call_store(`set_${store_prefix}`, null), $router.push({ name: `All${route_prefix}` })" class="btn rounded-pill btn-outline-warning">
                         <i class="fa fa-arrow-left me-5px"></i>
                         <span> Back </span>
                     </a>
+                    <!-- <li>
+                        <permission-button
+                            :permission="'can_edit'"
+                            :to="{name:`Details${route_prefix}`,params:{id:item.id}}"
+                            :classList="''">
+                            <i class="fa text-secondary fa-eye"></i>
+                            Details
+                        </permission-button>
+                    </li> -->
                 </div>
             </div>
 
@@ -293,6 +306,7 @@ export default {
         });
         console.log("mydata", this[`get_${store_prefix}`]);
     },
+    
     watch: {
         get_product_selected: {
             handler: function (v) {

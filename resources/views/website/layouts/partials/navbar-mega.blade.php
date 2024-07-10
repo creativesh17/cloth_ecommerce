@@ -1,7 +1,7 @@
 <div id="mega-menu">
     <div class="btn-mega"><span></span>ALL CATEGORIES</div>
     @php
-        $parentCats = \App\Models\Category::where('parent_id', 0)->where('status', 1)->limit(10)->get();
+        $parentCats = \App\Models\Category::where('parent_id', 0)->where('is_top_category', 1)->where('status', 1)->limit(10)->get();
     @endphp
 
     <ul class="menu" style="z-index: -9;">

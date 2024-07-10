@@ -89,6 +89,7 @@
                                 <input v-else @change="call_store(`set_selected_${store_prefix}s`,item)" type="checkbox" class="form-check-input">
                             </td>
                             <td>{{ item.id }}</td>
+                            <!-- <td>{{ item.order_address && item.order_address.id }}</td> -->
                             <td>
                                 <span class="text-warning cursor_pointer" @click.prevent="call_store(`set_${store_prefix}`,item)">
                                     {{ item.invoice_id }}
@@ -213,6 +214,7 @@ export default {
     },
     created: function(){
         this[`fetch_${store_prefix}s`]();
+        console.log("dekhi ... ", this[`fetch_${store_prefix}s`]());
     },
     methods: {
         ...mapActions([

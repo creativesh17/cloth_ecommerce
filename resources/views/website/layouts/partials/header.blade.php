@@ -178,7 +178,7 @@
 </div><!-- /.header-middle -->
 
 @php
-    $parentMenus = \App\Models\Category::where('parent_id', 0)->where('is_top_category', 1)->where('status', 1)->limit(5)->get();
+    $parentMenus = \App\Models\Category::where('parent_id', 0)->where('is_nav_category', 1)->where('status', 1)->limit(5)->get();
 @endphp
 
 <div class="header-bottom">

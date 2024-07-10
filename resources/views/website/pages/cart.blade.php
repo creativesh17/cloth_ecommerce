@@ -10,7 +10,6 @@
     $shippingCharge = 50;
 @endphp
 @section('content')
-
 @include('website.layouts.partials.breadcrumb')
 
 <section class="flat-shop-cart">
@@ -24,7 +23,7 @@
                             <button type="submit" class="btn btn-info" title="">Update Cart</button>    
                         @endif
                     </div>
-                    <div class="table-cart mCustomScrollbar _mCS_1 mCS_no_scrollbar">
+                    <div class="table-cart mCustomScrollbar ">
                         <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_horizontal mCSB_inside"
                             style="max-height: none;" tabindex="0">
                             <div id="mCSB_1_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x"
@@ -36,7 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Product</th>
-                                                <th>Quantity</th>
+                                                <th class="cart-show-page">Quantity</th>
                                                 <th>Total</th>
                                                 <th></th>
                                             </tr>
@@ -57,7 +56,7 @@
                                                                 <img src="{{ $product->options->image }}" alt="" class="mCS_img_loaded" />
                                                             </div>
                                                             <div>
-                                                                <div class="name-product">
+                                                                <div class="name-product name-product-size">
                                                                 {{ $product->name }}
                                                                     @if($product->options->v_titles) @foreach ($product->options->v_titles as $title) - {{ $title }}
                                                                     @endforeach
@@ -73,12 +72,12 @@
                                                     </td>
 
                                                     <td>
-                                                        <div class="quanlity product_count">
+                                                        <div class="quanlity product_count product_count_size">
                                                             <input type="number" name="product[{{ $key }}][qty]" value="{{ $product->qty }}" min="1" max="100" class="" placeholder="Quanlity" />
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="total" style="white-space: nowrap;">
+                                                        <div class="total total-cart" style="white-space: nowrap;">
                                                             {{ number_format($product->price * $product->qty) }} ৳
                                                         </div>
                                                     </td>
