@@ -10,7 +10,8 @@
 {{-- @include('website.layouts.partials.banner') --}}
 @include('website.layouts.partials.top-category-offer', [
     'topCateAll' => $topCateAll,
-    'specialProducts' => $specialProducts
+    'specialProducts' => $specialProducts,
+    'mostViewProducts' => $mostViewProducts
 ])
 {{-- @include('website.layouts.partials.flat-highlights') --}}
 @include('website.layouts.partials.flat-iconbox')

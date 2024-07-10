@@ -24,7 +24,8 @@ class WebsiteController extends Controller
         // dd(Carbon::now()->subDay());
         $topCateAll = Category::where('is_top_category', 1)->orderBy("id","asc")->limit(8)->get();
         $specialProducts = Product::has('discount')->limit(10)->get();
-        return view('website.layouts.home', compact('topCateAll', 'specialProducts'));
+        $mostViewProducts = Product::where('status', 1)->where('view_count', '>', 0)->orderBy('view_count', 'DESC')->latest()->limit(12)->get();
+        return view('website.layouts.home', compact('topCateAll', 'specialProducts', 'mostViewProducts'));
     }
 
     public function aboutus() {
